@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AoE2 Civpicker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rev="made" href="mailto:jroquet@arkanosis.net" />
+    <style>
+      * {
+        color: #212529;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        color: #24478f;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      header, footer {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        background-color: #eaecf0;
+      }
+      footer {
+        bottom:0;
+      }
+      form {
+        padding: 15px;
+      }
+      .warning {
+        padding: 15px;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+        border-radius: 4px;
+      }
+      .warning, .warning strong {
+        color: #8a6d3b;
+      }
+      .version {
+          margin-bottom: 0;
+          bottom: 0;
+          right: 0;
+          width: 100%;
+          text-align:right;
+      }
+      table {
+          text-align: left;
+          width: 100%;
+      }
+      th, td {
+          border-bottom: 1px solid #ddd;
+      }
+      tr:hover {
+          background-color: #f5f5f5;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <!--<img src="logo.svg" alt="civpicker logo" width="120" height="120" style="padding: 10px;">-->
+      <div style="height: 120px; margin-left: 10px; padding: 10px;"><h1 style="font-size: 50px;">AoE2 Civpicker</h1></div>
+    </header>
+    <main style="padding: 10px">
+      <p class="warning">
+        <strong>Warning!</strong> this is a very alpha version.
+      </p>
+      <section>
+        <h2>What do you want to play?</h2>
+        <form action="/query">
+          <div>
+            <input type="checkbox" id="infantry"><label for="infantry">infantry</label>
+            <input type="checkbox" id="archers"><label for="archers">archers</label>
+            <input type="checkbox" id="cavalry"><label for="cavalry">cavalry</label>
+            <input type="checkbox" id="siege"><label for="siege">siege</label>
+            <input type="checkbox" id="monks"><label for="monks">monks</label>
+            <input type="checkbox" id="gunpowder"><label for="gunpowder">gunpowder</label>
+          </div>
+        </form>
+      </section>
+      <section>
+        <h2>Civs that you might like</h2>
+        <table id="civs">
+          <tr id="header">
+            <th>Civ</th>
+            <th>Strengths</th>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Aztecs">Aztecs</a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Berbers">Berbers</a></td>
+            <td>cavalry</td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#">Bohemians</a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Britons">Britons</a></td>
+            <td>archers</td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#">Bulgarians</a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Burgundians">Burgundians</a></td>
+            <td>cavalry, gunpowder</td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#">Burmese</a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#">Byzantines</a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Celts">Celts</a></td>
+            <td>infantry, siege</td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#">Chinese</a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#">Cumans</a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Ethiopians">Ethiopians</a></td>
+            <td>archers, siege</td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Franks">Franks</a></td>
+            <td>cavalry</td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Goths">Goths</a></td>
+            <td>infantry</td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Lithuanians">Lithuanians</a></td>
+            <td>cavalry, monks</td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Mayans">Mayans</a></td>
+            <td>archers, infantry</td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Slavs">Slavs</a></td>
+            <td>infantry, siege, monks</td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#"></a></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#Vietnamese">Vietnamese</a></td>
+            <td>archers</td>
+          </tr>
+          <tr>
+            <td><a href="https://aoe2techtree.net/#">Vikings</a></td>
+            <td>infantry, archers</td>
+          </tr>
+        </table>
+      </section>
+      <aside>
+        <h2>Other tools to help you</h2>
+        <ul>
+          <li><a href="https://aoe2-de-tools.herokuapp.com/civ-ranking/">Simplified tech tree</a></li>
+          <li><a href="https://aoe2techtree.net/">Detailed tech tree</a></li>
+          <li><a href="https://play.google.com/store/apps/details?id=com.aoedb">Pocket tech tree (for Android)</a></li>
+          <li><a href="https://krakenmeister.com/civbuilder">Civ builder (if none is good enough for you)</a></li>
+          <li><a href="https://github.com/Arkanosis/awesome-aoe2">More tools</a></li>
+        </ul>
+      </aside>
+      <p class="version">
+        Civpicker v0.1.0 (DotD)
+      </p>
+    </main>
+    <footer>
+      <p style="width: 100%; text-align: center;">
+        Made by <a href="https://arkanosis.net">Arkanosis</a>.
+        Code fully available <a href="view-source:index.html">within this page</a>, under the ISC license.
+      </p>
+    </footer>
+    <script type="text/javascript">
+      function refresh() {
+          document.querySelectorAll('tr:not(#header)').forEach(function(row) {
+              row.style.display = 'table-row';
+              document.querySelectorAll('input[type=checkbox]:checked').forEach(function(checkbox) {
+                  if (!row.querySelectorAll('td')[1].textContent.includes(checkbox.id)) {
+                      row.style.display = 'none';
+                  }
+              });
+          });
+      }
+      document.querySelectorAll('input[type=checkbox]').forEach(function(checkbox) {
+          checkbox.addEventListener('change', refresh);
+      });
+      refresh();
+    </script>
+  </body>
+</html>
