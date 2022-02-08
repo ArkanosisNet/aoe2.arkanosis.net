@@ -71,9 +71,6 @@
       <div style="height: 120px; margin-left: 10px; padding: 10px;"><h1 style="font-size: 50px;">AoE2 Civpicker</h1></div>
     </header>
     <main style="padding: 10px">
-      <p class="warning">
-        <strong>Warning!</strong> this is a very alpha version.
-      </p>
       <section>
         <h2>What do you want to play?</h2>
         <form action="/query">
@@ -264,6 +261,9 @@
             <td>infantry, archers, ships</td>
           </tr>
         </table>
+	<p id="noresult" class="warning" style="display: none;">
+          No civ is good with all that stuff! Try to <a href="https://krakenmeister.com/civbuilder">create your own</a>, maybe?
+	</p>
       </section>
       <aside>
         <h2>Other tools to help you</h2>
@@ -276,7 +276,7 @@
         </ul>
       </aside>
       <p class="version">
-        Civpicker v0.1.0 (DotD)
+        Civpicker v0.2.0 (DotD)
       </p>
     </main>
     <footer>
@@ -287,13 +287,34 @@
     </footer>
     <script type="text/javascript">
       function refresh() {
+          var atLeastOne = false;
           document.querySelectorAll('tr:not(#header)').forEach(function(row) {
               row.style.display = 'table-row';
+	      var keepRow = true;
               document.querySelectorAll('input[type=checkbox]:checked').forEach(function(checkbox) {
                   if (!row.querySelectorAll('td')[1].textContent.includes(checkbox.id)) {
-                      row.style.display = 'none';
-                  }
+		      keepRow = false;
+		  }
               });
+	      if (keepRow) {
+                  atLeastOne = true;
+	      } else {
+                  row.style.display = 'none';
+              }
+          });
+          document.querySelectorAll('#civs').forEach(function(list) {
+	      if (atLeastOne) {
+		  list.style.display = 'block';
+	      } else {
+		  list.style.display = 'none';
+	      }
+          });
+          document.querySelectorAll('#noresult').forEach(function(paragraph) {
+	      if (atLeastOne) {
+		  paragraph.style.display = 'none';
+	      } else {
+		  paragraph.style.display = 'block';
+	      }
           });
       }
       document.querySelectorAll('input[type=checkbox]').forEach(function(checkbox) {
