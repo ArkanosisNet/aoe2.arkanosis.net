@@ -75,25 +75,25 @@
         <h2>What do you want to play?</h2>
         <form action="/query">
           <dl>
-	    <dt>Barracks</dt><dd>
+            <dt>Barracks</dt><dd>
               <input type="checkbox" id="infantry"><label for="infantry">infantry</label>
-	    </dd>
-	    <dt>Archery range</dt><dd>
+            </dd>
+            <dt>Archery range</dt><dd>
               <input type="checkbox" id="archers"><label for="archers">archers</label>
-              <input type="checkbox" id="CAs"><label for="CAs">CAs</label>
+              <input type="checkbox" id="CAs"><label for="CAs"><abbr title="cavalry and camel archers">CAs</abbr></label>
               <input type="checkbox" id="gunpowder"><label for="gunpowder">gunpowder</label>
-	    </dd>
-	    <dt>Stable</dt><dd>
+            </dd>
+            <dt>Stable</dt><dd>
               <input type="checkbox" id="cavalry"><label for="cavalry">cavalry</label>
               <input type="checkbox" id="camels"><label for="camels">camels</label>
               <input type="checkbox" id="elephants"><label for="elephants">elephants</label>
-	    </dd>
-	    <dt>Others</dt><dd>
+            </dd>
+            <dt>Others</dt><dd>
               <input type="checkbox" id="siege"><label for="siege">siege</label>
               <input type="checkbox" id="monks"><label for="monks">monks</label>
               <input type="checkbox" id="ships"><label for="ships">ships</label>
               <input type="checkbox" id="defense"><label for="defense">defense</label>
-	    </dd>
+            </dd>
           </dl>
         </form>
       </section>
@@ -290,31 +290,31 @@
           var atLeastOne = false;
           document.querySelectorAll('tr:not(#header)').forEach(function(row) {
               row.style.display = 'table-row';
-	      var keepRow = true;
+              var keepRow = true;
               document.querySelectorAll('input[type=checkbox]:checked').forEach(function(checkbox) {
                   if (!row.querySelectorAll('td')[1].textContent.includes(checkbox.id)) {
-		      keepRow = false;
-		  }
+                      keepRow = false;
+                  }
               });
-	      if (keepRow) {
+              if (keepRow) {
                   atLeastOne = true;
-	      } else {
+              } else {
                   row.style.display = 'none';
               }
           });
           document.querySelectorAll('#civs').forEach(function(list) {
-	      if (atLeastOne) {
-		  list.style.display = 'block';
-	      } else {
-		  list.style.display = 'none';
-	      }
+              if (atLeastOne) {
+                  list.style.display = 'block';
+              } else {
+                  list.style.display = 'none';
+              }
           });
           document.querySelectorAll('#noresult').forEach(function(paragraph) {
-	      if (atLeastOne) {
-		  paragraph.style.display = 'none';
-	      } else {
-		  paragraph.style.display = 'block';
-	      }
+              if (atLeastOne) {
+                  paragraph.style.display = 'none';
+              } else {
+                  paragraph.style.display = 'block';
+              }
           });
       }
       document.querySelectorAll('input[type=checkbox]').forEach(function(checkbox) {
