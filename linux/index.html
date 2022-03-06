@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AoE2 on Linux</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rev="made" href="mailto:jroquet@arkanosis.net" />
+    <style>
+      * {
+        color: #212529;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        color: #24478f;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      header, footer {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        background-color: #eaecf0;
+      }
+      footer {
+        bottom:0;
+      }
+      form {
+        padding: 15px;
+      }
+      .warning {
+        padding: 15px;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+        border-radius: 4px;
+      }
+      .warning, .warning strong {
+        color: #8a6d3b;
+      }
+      .version {
+          margin-bottom: 0;
+          bottom: 0;
+          right: 0;
+          width: 100%;
+          text-align:right;
+      }
+      table {
+          text-align: left;
+          width: 100%;
+      }
+      th, td {
+          border-bottom: 1px solid #ddd;
+      }
+      tr:hover {
+          background-color: #f5f5f5;
+      }
+      td span {
+          text-decoration: underline dotted #24478f;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <!--<img src="logo.svg" alt="AoE2 on Linux logo" width="120" height="120" style="padding: 10px;">-->
+      <div style="height: 120px; margin-left: 10px; padding: 10px;"><h1 style="font-size: 50px;">AoE2 on Linux</h1></div>
+    </header>
+    <p id="noresult" class="warning">
+      Disclaimer: I've barely started writing this page, so there's very little information at the moment.
+    </p>
+    <main style="padding: 10px">
+      <section>
+        <h2 id="which_version_of_aoe2_should_i_play">Which version of AoE2 should I play?</h2>
+	<p>As of 2022, there are three mutually-incompatible versions of Age of Empires II:</p>
+	<ul>
+	  <li><strong>Age of Empires II : Definitive Edition</strong>, released in 2019 and available on Steam (Linux-friendly), on the Microsoft store (<em>not</em> Linux-friendly) and through the Xbox game pass (<em>not</em> Linux-friendly)</li>
+	  <li><strong>Age of Empires II : HD Edition</strong>, released in 2013 and available on Steam (Linux-friendly)</li>
+	  <li><strong>Age of Empires II : The Age of Kings / The Conquerors</strong>, released in 1999 and available on CD (Linux-friendly) through various resellers</li>
+	</ul>
+	<p>There's very little debate about which version is the best, and they all run on Linux equally well, so let's get straight to the answer: play the <strong>Definitive Edition</strong> and get it <strong>on Steam</strong>.</p>
+	<p>There's some points to be made about playing an older version, though:</p>
+	<ul>
+	  <li>If your friends play an older version and you want to play with them, play their version.</li>
+	  <li>If your hardware can't run the Definitive Edition, and you can't aford upgrading, try an older version (keep in mind that if you've poor network connectivity, the Definitive Edition is better for online multiplayer).</li>
+	  <li>If you don't have Internet or want to make sure you'll be able to play forever, play The Age of Kings / The Conquerors, because latter versions require an Internet connection (and a server running somewhere at Microsoft).</li>
+	</ul>
+	<p>If none of these is particularly important to you, again: play the <strong>Definitive Edition</strong> and get it <strong>on Steam</strong> (NB: you'll be able to play with your friends who got it on the Microsoft Store or through the Xbox game pass, don't worry).</p>
+      </section>
+      <section>
+        <h2 id="how_do_i_play_on_linux">How do I play on Linux?</h2>
+	<p>That's easy. Go to the section below which applies to the version you want to play (and ignore the other sections that are not relevant to your version).</p>
+	<section>
+	  <h3>Age of Empires II : Definitive Edition</h3>
+	  <p><abbr title="to be written">TBW</abbr></p>
+	  <!-- ucrtbase.dll, vulkan icd -->
+	  <aside>
+	    <h4>Other places to find more information</h4>
+	    <ul>
+	      <li><a href="https://github.com/ValveSoftware/Proton/issues/3189">Definitive Edition on Proton's GitHub</a></li>
+	      <li><a href="https://www.protondb.com/app/813780">Definitive Edition on ProtonDB</a></li>
+	    </ul>
+	  </aside>
+	</section>
+	<section>
+	  <h3>Age of Empires II : HD Edition</h3>
+	  <p><abbr title="to be written">TBW</abbr></p>
+	  <aside>
+	    <h4>Other places to find more information</h4>
+	    <ul>
+	      <li><a href="https://github.com/ValveSoftware/Proton/issues/72">HD Edition on Proton's GitHub</a></li>
+	      <li><a href="https://www.protondb.com/app/221380">HD Edition on ProtonDB</a></li>
+	    </ul>
+	  </aside>
+	</section>
+	<section>
+	  <h3>Age of Empires II : The Age of Kings / The Conquerors</h3>
+	  <p><abbr title="to be written">TBW</abbr></p>
+	  <!-- $CWD -->
+	  <aside>
+	    <h4>Other places to find more information</h4>
+	    <ul>
+	      <li><a href="https://appdb.winehq.org/appview.php?iVersionId=4184">The Conquerors on Wine's AppDB</a></li>
+	      <li><a href="https://appdb.winehq.org/appview.php?iVersionId=147">The Age of Kings on Wine's AppDB</a></li>
+	    </ul>
+	  </aside>
+	</section>
+      </section>
+      <section>
+        <h2 id="should_i_play_on_linux">Should I play on Linux?</h2>
+	<p>That's an interesting question. I assumed you already had an opinion on this, but if you don't, here's some thoughts:</p>
+	<ul>
+	  <li>AoE2 won't work better on Linux than on Windows. If you observe slightly better performance than on Windows, that's because the operating system itself, or the other programes running on it (antivirus, bloatware, malware…) were interfering with the game.</li>
+	  <li>AoE2 won't work worse on Linux than on Windows. That being said, as the game is developed for Windows and not for Linux, you may have to apply some tweaks (discussed above) and possibly apply them again everytime there's an update.</li>
+	  <li>Linux-based operating systems and Windows are, well, different operating systems. Don't expect them to work exactly the same. If you already use Linux or want to switch to it, then you have the possibility to play AoE2 just fine on it — you don't need to use Windows. If you don't want to switch to Linux, then AoE2 alone is not a good reason to change your mind (there are, however, many valid reasons to want to switch to a free operating system, but that's off-topic).</li>
+	</ul>
+	<p>All in all, I'd say: play on your operating system of choice; don't let anybody else chose your operating system for you.</p>
+      </section>
+      <section>
+        <h2>Acknowledgements</h2>
+	<p>There's a very long list of people to thank for being able to play AoE2 on Linux. Of course, this would not have been possible without the efforts behind the Wine project since 1993 and behind the DXVK and Proton projects since 2017. But individuals from the AoE2 on Linux community have been helping a lot as well, through Wine's AppDB, ProtonDB, GitHub, Reddit, Discord…</p>
+	<p>Everything described on this page is the result of many people tireless attempts at making the game work on Linux and their willingness to share their discoveries with everybody.</p>
+	<p>Thanks everyone, GL HF!</p>
+      </section>
+      <p class="version">
+        Last update on 2022-03-06 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-de-update-59165/">DotD 59165</a>)
+      </p>
+    </main>
+    <footer>
+      <p style="width: 100%; text-align: center;">
+        Made by <a href="https://arkanosis.net">Arkanosis</a>.
+        Text available <a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net">on GitHub</a> under the <a href="https://creativecommons.org/licenses/by/4.0/deed">the CC-BY 4.0 license</a>.
+      </p>
+    </footer>
+  </body>
+</html>
