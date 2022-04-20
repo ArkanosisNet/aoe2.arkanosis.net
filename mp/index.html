@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AoE2 MultiProfile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rev="made" href="mailto:jroquet@arkanosis.net" />
+    <link rel="canonical" href="https://aoe2.arkanosis.net/mp/" />
+    <style>
+      * {
+        color: #212529;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        color: #24478f;
+        text-decoration: none;
+      }
+      th a {
+        color: black;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      header, footer {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        background-color: #eaecf0;
+      }
+      footer {
+        bottom:0;
+      }
+      form {
+        padding: 15px;
+      }
+      .warning {
+        padding: 15px;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+        border-radius: 4px;
+      }
+      .warning, .warning strong {
+        color: #8a6d3b;
+      }
+      .version {
+          margin-bottom: 0;
+          bottom: 0;
+          right: 0;
+          width: 100%;
+          text-align:right;
+      }
+      table {
+          text-align: left;
+          width: 100%;
+      }
+      th, td {
+          border-bottom: 1px solid #ddd;
+      }
+      tr:hover {
+          background-color: #f5f5f5;
+      }
+      td span {
+          text-decoration: underline dotted #24478f;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <!--<img src="logo.svg" alt="mp logo" width="120" height="120" style="padding: 10px;">-->
+      <div style="height: 120px; margin-left: 10px; padding: 10px;"><h1 style="font-size: 50px;">AoE2 MultiProfile</h1></div>
+    </header>
+    <main style="padding: 10px">
+      <section>
+        <h2>Individual profiles</h2>
+        <table id="profiles">
+          <thead>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h2>Chart of all ratings</h2>
+        <ul>
+          <li><a id="ratings">Rating Charts</a></li>
+        </ul>
+      </section>
+      <aside>
+        <h2>Other tools to help you</h2>
+        <ul>
+          <li><a href="https://github.com/Arkanosis/awesome-aoe2">More tools</a></li>
+        </ul>
+      </aside>
+      <p class="version">
+        MultiProfile v0.1.0
+      </p>
+    </main>
+    <footer>
+      <p style="width: 100%; text-align: center;">
+        Made by <a href="https://arkanosis.net">Arkanosis</a>.
+        Code available <a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net">on GitHub</a> under the <a href="https://raw.githubusercontent.com/ArkanosisNet/aoe2.arkanosis.net/master/LICENSE">the ISC license</a>.
+      </p>
+    </footer>
+    <script type="text/javascript">
+      function resolveNames(profileIds) {
+        for (const profileId of profileIds) {
+          fetch(`https://aoe2.net/api/leaderboard?game=aoe2de&leaderboard_id=4&profile_id=${profileId}&count=1`)
+            .then(function(response) {
+              if (response.status === 200) {
+                response.json().then(function(data) {
+		  var a = document.createElement('a');
+		  a.setAttribute('href', 'https://steamcommunity.com/profiles/' + data.leaderboard[0].steam_id);
+		  a.appendChild(document.createTextNode(data.leaderboard[0].name));
+                  var profile = document.getElementById(profileId);
+                  profile.replaceChild(a, profile.firstChild);
+                });
+              }
+            });
+        }
+      }
+
+      function addHeader(thead, profileIds) {
+        var tr = document.createElement('tr');
+        for (const profileId of profileIds) {
+          var th = document.createElement('th');
+          th.setAttribute('id', profileId);
+          th.appendChild(document.createTextNode(profileId));
+          tr.appendChild(th);
+        }
+        thead.appendChild(tr);
+      }
+
+      function addRow(tbody, profileIds, href, label) {
+        var tr = document.createElement('tr');
+        for (const profileId of profileIds) {
+          var td = document.createElement('td');
+          var a = document.createElement('a');
+          a.setAttribute('href', href.replace('${profileId}', profileId));
+          a.appendChild(document.createTextNode(label));
+          td.appendChild(a);
+          tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+      }
+
+      function initialize() {
+          var profileIds = window.location.hash.substring(1).split(',');
+          var profiles = document.getElementById('profiles');
+          var thead = profiles.getElementsByTagName('thead')[0]
+          addHeader(thead, profileIds);
+          resolveNames(profileIds);
+          var tbody = profiles.getElementsByTagName('tbody')[0];
+          addRow(tbody, profileIds, 'https://aoe2.net/#profile-${profileId}', 'AoE2.net');
+          addRow(tbody, profileIds, 'https://www.aoe2insights.com/user/${profileId}/', 'AoE2Insights');
+          addRow(tbody, profileIds, 'https://aoenexus.com/profile/#${profileId}-4', 'AoE Nexus');
+          // TODO FIXME addRow(tbody, profileIds, 'https://app.aoe2companion.com/', 'AoE II Companion');
+          addRow(tbody, profileIds, 'https://overlays.polskafan.de/rating/?profile_id=${profileId}', 'Simple overlay');
+          addRow(tbody, profileIds, 'https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}', 'Detailed overlay');
+          addRow(tbody, profileIds, 'https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}&f=1', 'Solo overlay');
+          document.getElementById('ratings').setAttribute('href', 'https://ratings.aoe2.se/?team_one=' + profileIds.join('-'));
+          // TODO also add profiles of opposing team + opoosing team in rating charts
+      }
+      initialize();
+    </script>
+  </body>
+</html>
