@@ -110,20 +110,29 @@
       </p>
     </footer>
     <script type="text/javascript">
-      function resolveNames(profileIds) {
+      async function nameToProfileId(name) {
+        const response = await fetch(`https://aoe2.net/api/leaderboard?game=aoe2de&leaderboard_id=4&count=100&search=${name}`);
+        if (response.status === 200) {
+          const data = await response.json();
+          for (const profile of data.leaderboard) {
+            if (profile.name === name) {
+              return profile.profile_id;
+            }
+          }
+        }
+      }
+
+      async function resolveNames(profileIds) {
         for (const profileId of profileIds) {
-          fetch(`https://aoe2.net/api/leaderboard?game=aoe2de&leaderboard_id=4&profile_id=${profileId}&count=1`)
-            .then(function(response) {
-              if (response.status === 200) {
-                response.json().then(function(data) {
-                  var a = document.createElement('a');
-                  a.setAttribute('href', 'https://steamcommunity.com/profiles/' + data.leaderboard[0].steam_id);
-                  a.appendChild(document.createTextNode(data.leaderboard[0].name));
-                  var profile = document.getElementById(profileId);
-                  profile.replaceChild(a, profile.firstChild);
-                });
-              }
-            });
+          const response = await fetch(`https://aoe2.net/api/leaderboard?game=aoe2de&leaderboard_id=4&profile_id=${profileId}&count=1`);
+          if (response.status === 200) {
+            const data = await response.json();
+            var a = document.createElement('a');
+            a.setAttribute('href', 'https://steamcommunity.com/profiles/' + data.leaderboard[0].steam_id);
+            a.appendChild(document.createTextNode(data.leaderboard[0].name));
+            var profile = document.getElementById(profileId);
+            profile.replaceChild(a, profile.firstChild);
+          }
         }
       }
 
@@ -160,8 +169,15 @@
         tbody.appendChild(tr);
       }
 
-      function initialize() {
+      async function initialize() {
           var profileIds = window.location.hash.substring(1).split(',');
+          for (var profileIdx = 0;
+               profileIdx < profileIds.length;
+               ++profileIdx) {
+            if (!profileIds[profileIdx].match(/^\d+$/)) {
+              profileIds[profileIdx] = await nameToProfileId(profileIds[profileIdx]);
+            }
+          }
           var profiles = document.getElementById('profiles');
           var thead = profiles.getElementsByTagName('thead')[0]
           addHeader(thead, profileIds);
