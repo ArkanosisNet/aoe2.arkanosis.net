@@ -170,7 +170,13 @@
       }
 
       async function initialize() {
-          var profileIds = window.location.hash.substring(1).split(',');
+          if (window.location.hash === "") {
+            var parameters = prompt("Please enter a comma-separated list of profile ids or names");
+            window.location.hash = '#' + parameters;
+          } else {
+            var parameters = window.location.hash.substring(1);
+          }
+          var profileIds = parameters.split(',');
           for (var profileIdx = 0;
                profileIdx < profileIds.length;
                ++profileIdx) {
