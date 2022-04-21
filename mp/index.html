@@ -100,7 +100,7 @@
         </ul>
       </aside>
       <p class="version">
-        MultiProfile v0.1.0
+        MultiProfile v0.2.0
       </p>
     </main>
     <footer>
@@ -116,9 +116,9 @@
             .then(function(response) {
               if (response.status === 200) {
                 response.json().then(function(data) {
-		  var a = document.createElement('a');
-		  a.setAttribute('href', 'https://steamcommunity.com/profiles/' + data.leaderboard[0].steam_id);
-		  a.appendChild(document.createTextNode(data.leaderboard[0].name));
+                  var a = document.createElement('a');
+                  a.setAttribute('href', 'https://steamcommunity.com/profiles/' + data.leaderboard[0].steam_id);
+                  a.appendChild(document.createTextNode(data.leaderboard[0].name));
                   var profile = document.getElementById(profileId);
                   profile.replaceChild(a, profile.firstChild);
                 });
@@ -129,6 +129,8 @@
 
       function addHeader(thead, profileIds) {
         var tr = document.createElement('tr');
+        var th = document.createElement('th');
+        tr.appendChild(th);
         for (const profileId of profileIds) {
           var th = document.createElement('th');
           th.setAttribute('id', profileId);
@@ -138,14 +140,21 @@
         thead.appendChild(tr);
       }
 
-      function addRow(tbody, profileIds, href, label) {
+      function addRow(tbody, profileIds, site, links) {
         var tr = document.createElement('tr');
+        var th = document.createElement('td');
+        th.appendChild(document.createTextNode(site));
+        tr.appendChild(th);
         for (const profileId of profileIds) {
           var td = document.createElement('td');
-          var a = document.createElement('a');
-          a.setAttribute('href', href.replace('${profileId}', profileId));
-          a.appendChild(document.createTextNode(label));
-          td.appendChild(a);
+          for (const link of links) {
+            var a = document.createElement('a');
+            a.setAttribute('href', link[0].replace('${profileId}', profileId));
+            a.appendChild(document.createTextNode(link[1]));
+            td.appendChild(a);
+            td.appendChild(document.createTextNode(', '));
+          }
+          td.removeChild(td.lastChild);
           tr.appendChild(td);
         }
         tbody.appendChild(tr);
@@ -158,13 +167,30 @@
           addHeader(thead, profileIds);
           resolveNames(profileIds);
           var tbody = profiles.getElementsByTagName('tbody')[0];
-          addRow(tbody, profileIds, 'https://aoe2.net/#profile-${profileId}', 'AoE2.net');
-          addRow(tbody, profileIds, 'https://www.aoe2insights.com/user/${profileId}/', 'AoE2Insights');
-          addRow(tbody, profileIds, 'https://aoenexus.com/profile/#${profileId}-4', 'AoE Nexus');
-          // TODO FIXME addRow(tbody, profileIds, 'https://app.aoe2companion.com/', 'AoE II Companion');
-          addRow(tbody, profileIds, 'https://overlays.polskafan.de/rating/?profile_id=${profileId}', 'Simple overlay');
-          addRow(tbody, profileIds, 'https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}', 'Detailed overlay');
-          addRow(tbody, profileIds, 'https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}&f=1', 'Solo overlay');
+          addRow(tbody, profileIds, 'AoE2.net', [
+            ['https://aoe2.net/#profile-${profileId}', 'profile'],
+            ['https://aoe2.net/#aoe2de-matches-${profileId}', 'matches'],
+          ]);
+          addRow(tbody, profileIds, 'Insights', [
+            ['https://www.aoe2insights.com/user/${profileId}/', 'profile'],
+            ['https://www.aoe2insights.com/user/${profileId}/stats/3/', '1v1'],
+            ['https://www.aoe2insights.com/user/${profileId}/stats/4/', 'TG'],
+            ['https://www.aoe2insights.com/user/${profileId}/matches/', 'matches'],
+          ]);
+          addRow(tbody, profileIds, 'Nexus', [
+            ['https://aoenexus.com/profile/#${profileId}-3', '1v1'],
+            ['https://aoenexus.com/profile/#${profileId}-4', 'TG'],
+          ]);
+          addRow(tbody, profileIds, 'AoE II Companion', [
+            ['https://app.aoe2companion.com/user/${profileId}/profile', 'profile'],
+            ['https://app.aoe2companion.com/user/${profileId}/stats', 'stats'],
+            ['https://app.aoe2companion.com/user/${profileId}/matches', 'matches'],
+          ]);
+          addRow(tbody, profileIds, 'Overlay', [
+            ['https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}&f=1', 'solo'],
+            ['https://overlays.polskafan.de/rating/?profile_id=${profileId}', 'simple'],
+            ['https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}', 'detailed'],
+          ]);
           document.getElementById('ratings').setAttribute('href', 'https://ratings.aoe2.se/?team_one=' + profileIds.join('-'));
           // TODO also add profiles of opposing team + opoosing team in rating charts
       }
