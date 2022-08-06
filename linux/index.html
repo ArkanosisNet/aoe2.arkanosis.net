@@ -55,28 +55,44 @@
       .warning, .warning strong {
         color: #8a6d3b;
       }
+      .details {
+        background-color: #eaecf0;
+        padding: 0 15px;
+        border-style: dashed;
+        border-color: gray;
+      }
       .version {
-          margin-bottom: 0;
-          bottom: 0;
-          right: 0;
-          width: 100%;
-          text-align:right;
+        margin-bottom: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        text-align:right;
       }
       table {
-          text-align: left;
-          width: 100%;
+        text-align: left;
+        width: 100%;
       }
       th, td {
-          border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
       }
       tr:hover {
-          background-color: #f5f5f5;
+        background-color: #f5f5f5;
       }
       td span {
-          text-decoration: underline dotted #24478f;
+        text-decoration: underline dotted #24478f;
       }
       img {
-          max-width: 95%;
+        max-width: 95%;
+      }
+      pre {
+        white-space: pre-line;
+        background-color: white;
+      }
+      code {
+        background-color: #eaecf0;
+      }
+      .details code {
+        background-color: white;
       }
     </style>
   </head>
@@ -191,12 +207,45 @@
         </aside>
       </section>
       <section>
-        <h2 id="how_do_i_play_aoe2_on_lan_on_linux">How do I play Age of Empires II on LAN on Linux?</h2>
+        <h2 id="how_do_i_play_aoe2_on_lan_on_linux">How do I play <i>Age of Empires II</i> on LAN on Linux?</h2>
         <!-- TODO -->
         <p>Playing on <abbr title="local area network">LAN</abbr> is a way to use the computer of one of the players as the server, when most people use a server provided by Microsoft instead.</p>
         <p>This is a feature which is available in all versions of the game, but while it's reachable right from the menu in The Age of Kings / The Conquerors, it's a bit hidden in the UI in later versions.</p>
         <p>With Age of Empires II: Definitive Edition, LAN mode is available when you create a lobby and select “local LAN” as server. This uses a program called <tt>BattleServer.exe</tt> on the lobby creator's computer. Unfortunately, as far as I know, nobody has been able to use <tt>BattleServer.exe</tt> on Linux (the “local LAN” option is not even available in the list of servers).</p>
         <p>Keep in mind that the player running the server has to make sure some ports are open on his computer (and not blocked by a firewall, or hidden behind a <abbr title="network address translation">NAT</abbr> device (like a router). Also be sure to use TCP/IP and UDP/IP as protocol, as some of the other protocols available in The Age of Kings / The Conquerors (like IPX) are probably not supported anymore by most operating systems, routers…</p>
+        <aside class="details">
+          <h3>Why <tt>BattleServer.exe</tt> doesn't work on Linux (technical)</h3>
+          <p>
+            As far as I'm aware, the reason why <tt>BattleServer.exe</tt> doesn't work on Linux remains unknown.
+          </p>
+          <p>
+            My own hypothesis (as of August 2022) is that it tries communicate with the game over <abbr title="user datagram protocol">UDP</abbr> on port <tt>9999</tt> by using the broadcast IP address <tt>255.255.255.255</tt>, but does so by using a <abbr title="transmission control protocol">TCP</abbr> socket, which may be legal on Windows (I don't know) but isn't on Linux.
+            One can see the following warning message in the console which briefly opens when <tt>BattleServer.exe</tt> starts:
+            <pre>
+              2022/08/06 23:20:33 #288 [Warning] Socks::Connect: failed; errno=10013 errstr='ATLAS_NOTINTABLE: Undefined error.'
+            </pre>
+            And at the same time, one can see the following output using <code>strace</code>:
+            <pre>
+              [pid 125190] bind(10, {sa_family=AF_INET, sin_port=htons(8888), sin_addr=inet_addr("0.0.0.0")}, 16) = 0
+              [pid 125190] close(10)                  = 0
+              [pid 125190] listen(10, 1000)           = 0
+              …
+              [pid 125190] dup(10)                    = 11
+              [pid 125190] connect(11, {sa_family=AF_INET, sin_port=htons(9999), sin_addr=inet_addr("255.255.255.255")}, 16) = -1 EACCES (Permission denied)
+              [pid 125190] close(11)                  = 0
+            </pre>
+            <tt>TCP:8888</tt> and <tt>UDP:9999</tt> are two ports which are documented to be used to play the game on LAN, and indeed, we can see that the latter is being used, in the output of <code>lsof -nP -i :9999</code>:
+            <pre>
+              COMMAND   PID             USER    FD  TYPE  DEVICE SIZE/OFF NODE NAM
+              wineserve 131455 nonfreegaming  310u  IPv4 2197508      0t0  UDP *:9999
+              AoE2DE_s. 131519 nonfreegaming   55u  IPv4 2197508      0t0  UDP *:9999
+            </pre>
+            I therefore assume that <tt>BattleServer.exe</tt> is supposed to let the game connect to itself on port <tt>8888</tt> and to broadcast its presence to all running games on the LAN on port <tt>9999</tt>, but can't do the latter because instead of creating a new socket of type <code>SOCK_DGRAM</code> for UDP, it uses a copy of a <code>SOCK_STREAM</code> socket designed for TCP.
+          </p>
+          <p>
+            If you've been able to dig further into the issue, please let me know.
+          </p>
+        </aside>
         <aside>
           <h3>Other places to find more information</h3>
           <ul>
@@ -209,6 +258,31 @@
         <!-- TODO -->
         <p><a href="https://captureage.com/">CaptureAge</a> is a very powerful tool to watch saved gamed with an overlay of information.</p>
         <p>Unfortunately, as far as I know, nobody has been able to use it on Linux. With little effort, one can start it, connect to the game and start replaying a saved game, but it won't show in the custom overlay.</p>
+        <aside class="details">
+          <h3>Why CaptureAge doesn't work on Linux (technical)</h3>
+          <p>
+            As far as I'm aware, the reason why CaptureAge doesn't work on Linux remains unknown.
+          </p>
+          <p>
+            My own hypothesis (as of August 2021) is that the problem is related to the encryption of <abbr title="inter-process communications">IPCs</abbr> between CaptureAge and the game.
+            Indeed, by looking at the logs, one can see that the initial IPCs are using Windows named pipes (and everything works fine), but then switch to SSL when replaying a saved game (and it breaks here):
+            <pre>
+              Pipe \\.\pipe\captureage_prod_ipc_REDACTED_domApp instance 0 state: connecting
+              Connecting to pipe \\.\pipe\captureage_prod_ipc_REDACTED_domApp
+              App event: application heartbeat outOfGame
+              Pipe \\.\pipe\captureage_prod_ipc_REDACTED_domApp instance 0 state: reading
+              App event: gameIntegration loadRec fromCadeExpanded
+              telling game to load replay C:\users\steamuser\Games\Age of Empires 2 DE\REDACTED\savegame.aoe2record
+              E0807 15:03:47.671000000   740 ssl_transport_security.cc:507] Corruption detected.
+              E0807 15:03:47.671000000   740 ssl_transport_security.cc:483] error:1408F119:SSL routines:ssl3_get_record:decryption failed or bad record mac
+              E0807 15:03:47.672000000   740 secure_endpoint.cc:208] Decryption error: TSI_DATA_CORRUPTED
+              E0807 15:03:47.672000000   740 ssl_transport_security.cc:534] SSL_write failed with error SSL_ERROR_SYSCALL.
+            </pre>
+          </p>
+          <p>
+            If you've been able to dig further into the issue, please let me know.
+          </p>
+        </aside>
         <aside>
           <h3>Other places to find more information</h3>
           <ul>
