@@ -131,7 +131,7 @@
             <li>Start Steam and log in.</li>
             <li>Open the “Steam” menu (1), then “Settings” (2).</li>
             <a href="./1.png"><img src="./1.png"></a>
-            <li>Go to the “Steam Play” section (1) and check the “Enable Steam Play for all other titles” box (2). You can leave the “Run other titles with” dropdown list (3) to its default value (the latest hopefully the better — Proton 6.3-8 is fine).</li>
+            <li>Go to the “Steam Play” section (1) and check the “Enable Steam Play for all other titles” box (2). You can leave the “Run other titles with” dropdown list (3) to its default value (the latest hopefully the better — Proton 7.0-3 is fine).</li>
             <a href="./2.png"><img src="./2.png"></a>
             <li>Now, AoE2:DE should be available in your Steam library as it would be if you were on Windows. Install the game.</li>
             <li>Start the game.</li>
@@ -219,7 +219,7 @@
             As far as I'm aware, the reason why <tt>BattleServer.exe</tt> doesn't work on Linux remains unknown.
           </p>
           <p>
-            My own hypothesis (as of August 2022) is that it tries communicate with the game over <abbr title="user datagram protocol">UDP</abbr> on port <tt>9999</tt> by using the broadcast IP address <tt>255.255.255.255</tt>, but does so by using a <abbr title="transmission control protocol">TCP</abbr> socket, which may be legal on Windows (I don't know) but isn't on Linux.
+            My own hypothesis (as of August 2022, with Proton 6.3-8) is that it tries communicate with the game over <abbr title="user datagram protocol">UDP</abbr> on port <tt>9999</tt> by using the broadcast IP address <tt>255.255.255.255</tt>, but does so by using a <abbr title="transmission control protocol">TCP</abbr> socket, which may be legal on Windows (I don't know) but isn't on Linux.
             One can see the following warning message in the console which briefly opens when <tt>BattleServer.exe</tt> starts:
             <pre>
               2022/08/06 23:20:33 #288 [Warning] Socks::Connect: failed; errno=10013 errstr='ATLAS_NOTINTABLE: Undefined error.'
@@ -309,7 +309,7 @@
         <p>Thanks everyone, GL HF!</p>
       </section>
       <p class="version">
-        Last update on 2022-08-05 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-63482/">DoI 63581</a>)
+        Last update on 2022-08-07 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-63482/">DoI 63581</a>)
       </p>
     </main>
     <footer>
