@@ -171,6 +171,22 @@
             </ol>
             <p>At this point, the game should work fine… until a driver update restores the Intel Vulkan ICD (at which point you just have to run the same command again).</p>
           </section>
+          <section>
+            <h4>The game disapears after the splash screen after changing my graphics card</h4>
+            <p>When you change your graphics card, you may switch to another <abbr title="graphical processing units">GPU</abbr> vendor in the process (eg. you had a Nvidia GPU-based graphics card and switch to an AMD GPU-based graphics card).</p>
+            <p>With some combinations of AoE2:DE and Proton, there's a known bug which causes Proton to use the Vulkan <abbr title="installable client driver">ICD</abbr> for the old GPU (eg. Nvidia) instead of the one for the new GPU (eg. AMD), which obviously can't work.</p>
+            <p>The only reliable workaround I'm aware of unfortunately prevents you from using two Vulkan ICDs at the same time. But, well… it works.</p>
+            <ol>
+              <li>Open a terminal.</li>
+              <li>Execute one of the following command (depending on your graphics cards).<ul>
+                  <li><code>sudo mv /usr/share/vulkan/icd.d/nvidia_icd.x86_64.json /usr/share/vulkan/icd.d/nvidia_icd.x86_64.json.disabled</code> (if you switch from Nvidia to AMD)</li>
+                  <li><code>sudo mv /usr/share/vulkan/icd.d/radeon_icd.x86_64.json /usr/share/vulkan/icd.d/radeon_icd.x86_64.json.disabled</code> (if you switch from AMD to Nvidia)</li>
+              </ul></li>
+              <li>Start the game again.</li>
+            </ol>
+            <p>At this point, the game should work fine… but you should make sure you've uninstalled the drivers for the old GPU, otherwise a driver update will restore the old Vulkan ICD (at which point you just have to run the same command again).</p>
+            <p>Note: depending on what GPU you were using before, and also on previous upgrades of your operating system, you may have more useless ICDs than just the ones mentionned above. Make sure only the useful ICD is present in <tt>/usr/share/vulkan/icd.d/</tt> and you should be fine.</p>
+          </section>
         </section>
         <aside>
           <h3>Other places to find more information</h3>
@@ -309,7 +325,7 @@
         <p>Thanks everyone, GL HF!</p>
       </section>
       <p class="version">
-        Last update on 2022-08-07 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-63482/">DoI 63581</a>)
+        Last update on 2022-08-14 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-63482/">DoI 63581</a>)
       </p>
     </main>
     <footer>
