@@ -171,7 +171,7 @@
 
       async function initialize() {
           if (window.location.hash === "") {
-            var parameters = prompt("Please enter a comma-separated list of profile ids or names");
+            var parameters = prompt("Please enter a comma-separated list of profile ids (use of profile names is currently broken)");
             window.location.hash = '#' + parameters;
           } else {
             var parameters = window.location.hash.substring(1);
@@ -189,26 +189,30 @@
           addHeader(thead, profileIds);
           resolveNames(profileIds);
           var tbody = profiles.getElementsByTagName('tbody')[0];
-          addRow(tbody, profileIds, 'AoE2.net', [
-            ['https://aoe2.net/#profile-${profileId}', 'profile'],
-            ['https://aoe2.net/#aoe2de-matches-${profileId}', 'matches'],
-          ]);
           addRow(tbody, profileIds, 'Insights', [
             ['https://www.aoe2insights.com/user/${profileId}/', 'profile'],
             ['https://www.aoe2insights.com/user/${profileId}/stats/3/', '1v1'],
             ['https://www.aoe2insights.com/user/${profileId}/stats/4/', 'TG'],
             ['https://www.aoe2insights.com/user/${profileId}/matches/', 'matches'],
           ]);
-          addRow(tbody, profileIds, 'Nexus', [
+          addRow(tbody, profileIds, 'AoeStats', [
+            ['https://aoestats.net/random-map?searchPlayer=${profileId}', '1v1'],
+            ['https://aoestats.net/random-map-tg?searchPlayer=${profileId}', 'TG'],
+          ]);
+          addRow(tbody, profileIds, 'AoE2.net (currently broken)', [
+            ['https://aoe2.net/#profile-${profileId}', 'profile'],
+            ['https://aoe2.net/#aoe2de-matches-${profileId}', 'matches'],
+          ]);
+          addRow(tbody, profileIds, 'Nexus (currently broken)', [
             ['https://aoenexus.com/profile/#${profileId}-3', '1v1'],
             ['https://aoenexus.com/profile/#${profileId}-4', 'TG'],
           ]);
-          addRow(tbody, profileIds, 'AoE II Companion', [
+          addRow(tbody, profileIds, 'AoE II Companion (currently broken)', [
             ['https://app.aoe2companion.com/user/${profileId}/profile', 'profile'],
             ['https://app.aoe2companion.com/user/${profileId}/stats', 'stats'],
             ['https://app.aoe2companion.com/user/${profileId}/matches', 'matches'],
           ]);
-          addRow(tbody, profileIds, 'Overlay', [
+          addRow(tbody, profileIds, 'Overlay (currently broken)', [
             ['https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}&f=1', 'solo'],
             ['https://overlays.polskafan.de/rating/?profile_id=${profileId}', 'simple'],
             ['https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}', 'detailed'],
