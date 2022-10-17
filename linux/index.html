@@ -211,9 +211,13 @@
         <h2 id="how_do_i_play_aoe2_aok_tc_on_linux">How do I play <i>Age of Empires II : The Age of Kings / The Conquerors</i> on Linux?</h2>
         <!-- TODO -->
         <p>Sorry, I haven't written this section yet. It works, though.</p>
+        <p>A few pointers:</p>
+        <ul>
+          <li>You can use Wine directly; there's no need for Steam Play or Proton.</li>
+          <li>You'll need to start the game from it's installation directory. Running it from anywhere else will cause it to crash right from the start.</li>
+        </ul>
         <!-- 32 bits? -->
         <!-- XP compatibility? -->
-        <!-- $CWD -->
         <aside>
           <h3>Other places to find more information</h3>
           <ul>
@@ -228,7 +232,7 @@
         <p>Playing on <abbr title="local area network">LAN</abbr> is a way to use the computer of one of the players as the server, when most people use a server provided by Microsoft instead.</p>
         <p>This is a feature which is available in all versions of the game, but while it's reachable right from the menu in The Age of Kings / The Conquerors, it's a bit hidden in the UI in later versions.</p>
         <p>With Age of Empires II: Definitive Edition, LAN mode is available when you create a lobby and select “local LAN” as server. This uses a program called <tt>BattleServer.exe</tt> on the lobby creator's computer. Unfortunately, as far as I know, nobody has been able to use <tt>BattleServer.exe</tt> on Linux (the “local LAN” option is not even available in the list of servers).</p>
-        <p>Keep in mind that the player running the server has to make sure some ports are open on his computer (and not blocked by a firewall, or hidden behind a <abbr title="network address translation">NAT</abbr> device (like a router). Also be sure to use TCP/IP and UDP/IP as protocol, as some of the other protocols available in The Age of Kings / The Conquerors (like IPX) are probably not supported anymore by most operating systems, routers…</p>
+        <p>Keep in mind that the player running the server has to make sure some ports are open on his computer (and not blocked by a firewall, or hidden behind a <abbr title="network address translation">NAT</abbr> device, like a router). Also be sure to use TCP/IP and UDP/IP as protocol, as some of the other protocols available in The Age of Kings / The Conquerors (like IPX) are probably not supported anymore by most operating systems, routers…</p>
         <aside class="details">
           <h3>Why <tt>BattleServer.exe</tt> doesn't work on Linux (technical)</h3>
           <p>
