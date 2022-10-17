@@ -94,6 +94,14 @@
       .details code {
         background-color: white;
       }
+      .anchor {
+        margin-left: -1em;
+        color: gray;
+        visibility: hidden;
+      }
+      h2:hover .anchor, h3:hover .anchor, h4:hover .anchor {
+        visibility: visible;
+      }
     </style>
   </head>
   <body>
@@ -106,7 +114,10 @@
     </p>
     <main style="padding: 10px">
       <section>
-        <h2 id="which_version_of_aoe2_should_i_play">Which version of AoE2 should I play?</h2>
+        <h2 id="which_version_of_aoe2_should_i_play">
+          <a href="#which_version_of_aoe2_should_i_play" class="anchor" aria-hidden="true">§</a>
+          Which version of AoE2 should I play?
+        </h2>
         <p>As of 2022, there are three mutually-incompatible versions of Age of Empires II:</p>
         <ul>
           <li><strong>Age of Empires II : Definitive Edition</strong>, released in 2019 and available on Steam (Linux-friendly), on the Microsoft store (<em>not</em> Linux-friendly) and through the Xbox game pass (<em>not</em> Linux-friendly)</li>
@@ -123,9 +134,15 @@
         <p>If none of these is particularly important to you, again: play the <strong>Definitive Edition</strong> and get it <strong>on Steam</strong> (NB: you'll be able to play with your friends who got it on the Microsoft Store or through the Xbox game pass, don't worry).</p>
       </section>
       <section>
-        <h2 id="how_do_i_play_aoe2_de_on_linux">How do I play <i>Age of Empires II : Definitive Edition</i> on Linux?</h2>
+        <h2 id="how_do_i_play_aoe2_de_on_linux">
+          <a href="#how_do_i_play_aoe2_de_on_linux" class="anchor" aria-hidden="true">§</a>
+          How do I play <i>Age of Empires II : Definitive Edition</i> on Linux?
+        </h2>
         <section>
-          <h3>Single player</h3>
+          <h3>
+            <a href="#how_do_i_play_aoe2_de_on_linux" class="anchor" aria-hidden="true">§</a>
+            Single player
+          </h3>
           <ol>
             <li>Install Steam (the Linux version).</li>
             <li>Start Steam and log in.</li>
@@ -139,7 +156,10 @@
           <p>At this point, the game should work fine <em>in single player mode</em>. If you want to play <em><u>online multiplayer</u></em>, however, keep on reading.</p>
         </section>
         <section>
-          <h3 id="aoe2_de_online_multiplayer">Online multiplayer</h3>
+          <h3 id="aoe2_de_online_multiplayer">
+            <a href="#aoe2_de_online_multiplayer" class="anchor" aria-hidden="true">§</a>
+            Online multiplayer
+          </h3>
           <p>Ignoring what follows won't prevent you from enjoying single player mode, but you'll encounter synchronization issues after a few seconds of playing online.</p>
           <ol>
             <li>Quit the game (it is important that you have at least started it once before the next step).</li>
@@ -156,9 +176,15 @@
           <p>At this point, the game should work fine in online multiplayer as well. Once in the game, you shouldn't see any difference compared to when playing on Windows.</p>
         </section>
         <section>
-          <h3>Troubleshooting</h3>
+          <h3 id="aoe2_de_troubleshooting">
+            <a href="#aoe2_de_troubleshooting" class="anchor" aria-hidden="true">§</a>
+            Troubleshooting
+          </h3>
           <section>
-            <h4>The game disapears after the splash screen on a Nvidia Optimus laptop</h4>
+            <h4 id="aoe2_de_troubleshooting_nvidia_optimus">
+              <a href="#aoe2_de_troubleshooting_nvidia_optimus" class="anchor" aria-hidden="true">§</a>
+              The game disapears after the splash screen on a Nvidia Optimus laptop
+            </h4>
             <p>Nvidia Optimus laptops have two <abbr title="graphical processing units">GPUs</abbr>: one Intel <abbr title="integrated graphical processing unit">iGPU</abbr> within the <abbr title="central processing unit">CPU</abbr> and one Nvidia <abbr title="discrete graphical processing unit">dGPU</abbr> in a graphics card. The iGPU is power-efficient and prefered for light tasks (like web browsing) whereas the dGPU is powerful and prefered for heavy tasks (like gaming).</p>
             <p>With some combinations of AoE2:DE and Proton, there's a known bug which causes Proton to use an Intel Vulkan <abbr title="installable client driver">ICD</abbr> on the Nvidia dGPU, which obviously can't work.</p>
             <p>The only reliable workaround I'm aware of unfortunately prevents you from using the Intel Vulkan ICD. But, well… it works.</p>
@@ -172,7 +198,10 @@
             <p>At this point, the game should work fine… until a driver update restores the Intel Vulkan ICD (at which point you just have to run the same command again).</p>
           </section>
           <section>
-            <h4>The game disapears after the splash screen after changing my graphics card</h4>
+            <h4 id="aoe2_de_troubleshooting_changing_graphics_card">
+              <a href="#aoe2_de_troubleshooting_changing_graphics_card" class="anchor" aria-hidden="true">§</a>
+              The game disapears after the splash screen after changing my graphics card
+            </h4>
             <p>When you change your graphics card, you may switch to another <abbr title="graphical processing units">GPU</abbr> vendor in the process (eg. you had a Nvidia GPU-based graphics card and switch to an AMD GPU-based graphics card).</p>
             <p>With some combinations of AoE2:DE and Proton, there's a known bug which causes Proton to use the Vulkan <abbr title="installable client driver">ICD</abbr> for the old GPU (eg. Nvidia) instead of the one for the new GPU (eg. AMD), which obviously can't work.</p>
             <p>The only reliable workaround I'm aware of unfortunately prevents you from using two Vulkan ICDs at the same time. But, well… it works.</p>
@@ -197,7 +226,10 @@
         </aside>
       </section>
       <section>
-        <h2 id="how_do_i_play_aoe2_hd_on_linux">How do I play <i>Age of Empires II : HD Edition</i> on Linux?</h2>
+        <h2 id="how_do_i_play_aoe2_hd_on_linux">
+          <a href="#how_do_i_play_aoe2_hd_on_linux" class="anchor" aria-hidden="true">§</a>
+          How do I play <i>Age of Empires II : HD Edition</i> on Linux?
+        </h2>
         <p>Follow the instructions for Age of Empires II: Definitive Edition, and it <em>should</em> work pretty much the same, I think.</p>
         <aside>
           <h3>Other places to find more information</h3>
@@ -208,7 +240,10 @@
         </aside>
       </section>
       <section>
-        <h2 id="how_do_i_play_aoe2_aok_tc_on_linux">How do I play <i>Age of Empires II : The Age of Kings / The Conquerors</i> on Linux?</h2>
+        <h2 id="how_do_i_play_aoe2_aok_tc_on_linux">
+          <a href="#how_do_i_play_aoe2_aok_tc_on_linux" class="anchor" aria-hidden="true">§</a>
+          How do I play <i>Age of Empires II : The Age of Kings / The Conquerors</i> on Linux?
+        </h2>
         <!-- TODO -->
         <p>Sorry, I haven't written this section yet. It works, though.</p>
         <p>A few pointers:</p>
@@ -227,7 +262,10 @@
         </aside>
       </section>
       <section>
-        <h2 id="how_do_i_play_aoe2_on_lan_on_linux">How do I play <i>Age of Empires II</i> on LAN on Linux?</h2>
+        <h2 id="how_do_i_play_aoe2_on_lan_on_linux">
+          <a href="#how_do_i_play_aoe2_on_lan_on_linux" class="anchor" aria-hidden="true">§</a>
+          How do I play <i>Age of Empires II</i> on LAN on Linux?
+        </h2>
         <!-- TODO -->
         <p>Playing on <abbr title="local area network">LAN</abbr> is a way to use the computer of one of the players as the server, when most people use a server provided by Microsoft instead.</p>
         <p>This is a feature which is available in all versions of the game, but while it's reachable right from the menu in The Age of Kings / The Conquerors, it's a bit hidden in the UI in later versions.</p>
@@ -274,7 +312,10 @@
         </aside>
       </section>
       <section>
-        <h2 id="how_do_i_use_capture_age_on_linux">How do I use <i>CaptureAge</i> on Linux?</h2>
+        <h2 id="how_do_i_use_capture_age_on_linux">
+          <a href="#how_do_i_use_capture_age_on_linux" class="anchor" aria-hidden="true">§</a>
+          How do I use <i>CaptureAge</i> on Linux?
+        </h2>
         <!-- TODO -->
         <p><a href="https://captureage.com/">CaptureAge</a> is a very powerful tool to watch saved gamed with an overlay of information.</p>
         <p>Unfortunately, as far as I know, nobody has been able to use it on Linux. With little effort, one can start it, connect to the game and start replaying a saved game, but it won't show in the custom overlay.</p>
@@ -313,7 +354,10 @@
         </aside>
       </section>
       <section>
-        <h2 id="should_i_play_on_linux">Should I play on Linux?</h2>
+        <h2 id="should_i_play_on_linux">
+          <a href="#should_i_play_on_linux" class="anchor" aria-hidden="true">§</a>
+          Should I play on Linux?
+        </h2>
         <p>That's an interesting question. I assumed you already had an opinion on this, but if you don't, here are some thoughts:</p>
         <ul>
           <li>AoE2 won't work better on Linux than on Windows. If you observe slightly better performance than on Windows, that's because the operating system itself, or other programs running on it (antivirus, bloatware, malware…) were interfering with the game.</li>
@@ -323,13 +367,16 @@
         <p>All in all, I'd say: play on your operating system of choice; don't let anybody else chose your operating system for you.</p>
       </section>
       <section>
-        <h2 id="acknowledgements">Acknowledgements</h2>
+        <h2 id="acknowledgements">
+          <a href="#acknowledgements" class="anchor" aria-hidden="true">§</a>
+          Acknowledgements
+        </h2>
         <p>There's a very long list of people to thank for being able to play AoE2 on Linux. Of course, this would not have been possible without the efforts behind the Wine project since 1993 and behind the DXVK and Proton projects since 2017. But individuals from the AoE2 on Linux community have been helping a lot as well, through Wine's AppDB, ProtonDB, GitHub, Reddit, Discord…</p>
         <p>Everything described on this page is the result of many people tireless attempts at making the game work on Linux and their willingness to share their discoveries with everybody.</p>
         <p>Thanks everyone, GL HF!</p>
       </section>
       <p class="version">
-        Last update on 2022-10-01 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-66692/">DoI 66692</a>)
+        Last update on 2022-10-17 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-66692/">DoI 66692</a>)
       </p>
     </main>
     <footer>
