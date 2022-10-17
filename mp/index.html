@@ -199,6 +199,9 @@
             ['https://aoestats.net/random-map?searchPlayer=${profileId}', '1v1'],
             ['https://aoestats.net/random-map-tg?searchPlayer=${profileId}', 'TG'],
           ]);
+          addRow(tbody, profileIds, 'Nexus (dev version)', [
+            ['https://dev.aoenexus.com/#profile/${profileId}', 'profile'],
+          ]);
           addRow(tbody, profileIds, 'AoE2.net (currently broken)', [
             ['https://aoe2.net/#profile-${profileId}', 'profile'],
             ['https://aoe2.net/#aoe2de-matches-${profileId}', 'matches'],
