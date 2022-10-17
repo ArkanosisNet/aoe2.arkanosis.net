@@ -195,6 +195,9 @@
             ['https://www.aoe2insights.com/user/${profileId}/stats/4/', 'TG'],
             ['https://www.aoe2insights.com/user/${profileId}/matches/', 'matches'],
           ]);
+          addRow(tbody, profileIds, 'AoE II Companion', [
+            ['https://aoe2companion.com/profile/${profileId}', 'profile'],
+          ]);
           addRow(tbody, profileIds, 'AoeStats', [
             ['https://aoestats.net/random-map?searchPlayer=${profileId}', '1v1'],
             ['https://aoestats.net/random-map-tg?searchPlayer=${profileId}', 'TG'],
@@ -209,11 +212,6 @@
           addRow(tbody, profileIds, 'Nexus (currently broken)', [
             ['https://aoenexus.com/profile/#${profileId}-3', '1v1'],
             ['https://aoenexus.com/profile/#${profileId}-4', 'TG'],
-          ]);
-          addRow(tbody, profileIds, 'AoE II Companion (currently broken)', [
-            ['https://app.aoe2companion.com/user/${profileId}/profile', 'profile'],
-            ['https://app.aoe2companion.com/user/${profileId}/stats', 'stats'],
-            ['https://app.aoe2companion.com/user/${profileId}/matches', 'matches'],
           ]);
           addRow(tbody, profileIds, 'Overlay (currently broken)', [
             ['https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}&f=1', 'solo'],
