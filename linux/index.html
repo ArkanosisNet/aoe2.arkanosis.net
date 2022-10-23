@@ -86,12 +86,11 @@
       }
       pre {
         white-space: pre-line;
-        background-color: white;
       }
-      code {
+      code, pre {
         background-color: #eaecf0;
       }
-      .details code {
+      .details code, .details pre {
         background-color: white;
       }
       .anchor {
@@ -120,9 +119,9 @@
         </h2>
         <p>As of 2022, there are three mutually-incompatible versions of Age of Empires II:</p>
         <ul>
-          <li><strong>Age of Empires II : Definitive Edition</strong>, released in 2019 and available on Steam (Linux-friendly), on the Microsoft store (<em>not</em> Linux-friendly) and through the Xbox game pass (<em>not</em> Linux-friendly)</li>
-          <li><strong>Age of Empires II : HD Edition</strong>, released in 2013 and available on Steam (Linux-friendly)</li>
-          <li><strong>Age of Empires II : The Age of Kings / The Conquerors</strong>, released in 1999 and available on CD (Linux-friendly) through various resellers</li>
+          <li><strong>Age of Empires II: Definitive Edition</strong>, released in 2019 and available on Steam (Linux-friendly), on the Microsoft store (<em>not</em> Linux-friendly) and through the Xbox game pass (<em>not</em> Linux-friendly)</li>
+          <li><strong>Age of Empires II: HD Edition</strong>, released in 2013 and available on Steam (Linux-friendly)</li>
+          <li><strong>Age of Empires II: The Age of Kings / The Conquerors</strong>, released in 1999 and available on CD (Linux-friendly) through various resellers</li>
         </ul>
         <p>There's very little debate about which version is the best, and they all run on Linux equally well, so let's get straight to the answer: play the <strong>Definitive Edition</strong> and get it <strong>on Steam</strong>.</p>
         <p>There are some fair points to be made about playing an older version, though:</p>
@@ -136,7 +135,7 @@
       <section>
         <h2 id="how_do_i_play_aoe2_de_on_linux">
           <a href="#how_do_i_play_aoe2_de_on_linux" class="anchor" aria-hidden="true">§</a>
-          How do I play <i>Age of Empires II : Definitive Edition</i> on Linux?
+          How do I play <i>Age of Empires II: Definitive Edition</i> on Linux?
         </h2>
         <section>
           <h3>
@@ -174,6 +173,28 @@
             <li>Start the game again.</li>
           </ol>
           <p>At this point, the game should work fine in online multiplayer as well. Once in the game, you shouldn't see any difference compared to when playing on Windows.</p>
+        </section>
+        <section>
+          <h3 id="aoe2_de_spectating_games_or_joining_lobbies">
+            <a href="#aoe2_de_spectating_games_or_joining_lobbies" class="anchor" aria-hidden="true">§</a>
+            Spectating games or joining lobbies by clicking <code>aoe2de://</code> links.
+          </h3>
+          <p>The most interoperable way to have <code>aoe2de://</code> links opened in the game is probably to configure an XDG scheme handler for that.</p>
+          <ol>
+            <li>Create a file called <code>~/.local/share/applications/aoe2de.desktop</code> with the following content
+            <pre>
+	      [Desktop Entry]
+	      Type=Application
+	      Name=Age of Empires II: Definitive Edition
+	      Exec=steam -applaunch 813780 %f
+	      MimeType=x-scheme-handler/aoe2de;
+            </pre></li>
+            <li>Execute the following command:<ul>
+                <li><code>xdg-settings set default-url-scheme-handler aoe2de aoe2de.desktop</code></li>
+            </ul></li>
+            <li>Make sure the program in which you click links (web browser, chat client…) uses <code>xdg-open</code> to handle unknown schemes (or at least the <code>aoe2de</code> scheme). That should be the case for most modern programs.</li>
+          </ol>
+          <p>At this point, clicking an <code>aoe2de://</code> link should start Age of Empires II: Definitive Edition (if not already started) and automatically spectate the game or join the lobby.</p>
         </section>
         <section>
           <h3 id="aoe2_de_troubleshooting">
@@ -228,7 +249,7 @@
       <section>
         <h2 id="how_do_i_play_aoe2_hd_on_linux">
           <a href="#how_do_i_play_aoe2_hd_on_linux" class="anchor" aria-hidden="true">§</a>
-          How do I play <i>Age of Empires II : HD Edition</i> on Linux?
+          How do I play <i>Age of Empires II: HD Edition</i> on Linux?
         </h2>
         <p>Follow the instructions for Age of Empires II: Definitive Edition, and it <em>should</em> work pretty much the same, I think.</p>
         <aside>
@@ -242,7 +263,7 @@
       <section>
         <h2 id="how_do_i_play_aoe2_aok_tc_on_linux">
           <a href="#how_do_i_play_aoe2_aok_tc_on_linux" class="anchor" aria-hidden="true">§</a>
-          How do I play <i>Age of Empires II : The Age of Kings / The Conquerors</i> on Linux?
+          How do I play <i>Age of Empires II: The Age of Kings / The Conquerors</i> on Linux?
         </h2>
         <!-- TODO -->
         <p>Sorry, I haven't written this section yet. It works, though.</p>
@@ -376,7 +397,7 @@
         <p>Thanks everyone, GL HF!</p>
       </section>
       <p class="version">
-        Last update on 2022-10-22 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-66692/">DoI 71094</a>)
+        Last update on 2022-10-24 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-66692/">DoI 71094</a>)
       </p>
     </main>
     <footer>
