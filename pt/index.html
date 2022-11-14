@@ -233,24 +233,29 @@
           };
         }
 
-        var feudal_time = civilization.dark_idle + (civilization.feudal_villagers - civilization.start_villagers) * 25 + 130 / civilization.feudal_research_speed;
-        if (loom  == 'dark' || !civilization.can_produce_first_villager) {
-          feudal_time += civilization.loom_duration;
-        }
+         tbody.replaceChildren();
 
-        var castle_time = feudal_time + (civilization.castle_villagers - civilization.feudal_villagers) * 25 / civilization.feudal_villager_speed + 160 / civilization.castle_research_speed;
-        if (loom  == 'feudal') {
-          castle_time += civilization.loom_duration;
-        }
+        for (var additional_feudal_villagers of [0, 1, 2, 3]) {
+          var total_feudal_villagers = civilization.feudal_villagers + additional_feudal_villagers;
+          var feudal_time = civilization.dark_idle + (total_feudal_villagers - civilization.start_villagers) * 25 + 130 / civilization.feudal_research_speed;
+          if (loom  == 'dark' || !civilization.can_produce_first_villager) {
+            feudal_time += civilization.loom_duration;
+          }
 
-        tbody.replaceChildren();
-        addRow(
-         (civilization.feudal_villagers + 1) + ' pop' + (castle_time < 16 * 60 ? ' fast castle' : ''),
-          civilization.feudal_villagers,
-          toTime(feudal_time),
-          civilization.castle_villagers + ' (+' + (civilization.castle_villagers - civilization.feudal_villagers) + ')',
-          toTime(castle_time)
-        );
+          var total_castle_villagers = civilization.castle_villagers + additional_feudal_villagers;
+          var castle_time = feudal_time + (civilization.castle_villagers - civilization.feudal_villagers) * 25 / civilization.feudal_villager_speed + 160 / civilization.castle_research_speed;
+          if (loom  == 'feudal') {
+            castle_time += civilization.loom_duration;
+          }
+
+          addRow(
+           (total_feudal_villagers + 1) + ' pop' + (castle_time < 16 * 60 ? ' fast castle' : ''),
+            total_feudal_villagers,
+            toTime(feudal_time),
+            total_castle_villagers + ' (+' + (total_castle_villagers - total_feudal_villagers) + ')',
+            toTime(castle_time)
+          );
+        }
       }
       document.querySelectorAll('input[type=checkbox],select').forEach(function(parameter) {
         parameter.addEventListener('change', refresh);
