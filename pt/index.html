@@ -100,20 +100,7 @@
             <li><label for="sell_stone">Sell stone</label> <input type="checkbox" id="sell_stone"></li>
           </ul>
         </form>
-        <p id="chinese_warning" class="warning" style="display: none;">
-          Warning: with Chinese, you have to research loom first in dark age as you can't produce a villager until your have gathered enough food for it!
-        </p>
-        <p id="goth_warning" class="warning" style="display: none;">
-          Warning: with Goths, you can research loom first in dark age as it's researched instantly!
-        </p>
-        <p id="khmer_warning" class="warning" style="display: none;">
-          Warning: selling stone with Khmers makes your castle age time worse because you have to build a market!
-        </p>
-        <p id="mayan_warning" class="warning" style="display: none;">
-          Warning: with Mayans you have to research loom first in dark age as you can't produce a villager until your first house is built!
-        </p>
-        <p id="persian_warning" class="warning" style="display: none;">
-          Warning: with Persians, you'll need three villagers to build your market or you'll lose a few seconds before clicking castle age!
+        <p id="warning" class="warning" style="display: none;">
         </p>
       </section>
       <section>
@@ -121,7 +108,7 @@
         <table id="perfect_times">
           <thead>
             <tr>
-              <th><abbr title="Build Order">BO</abbr> name</th>
+              <th>Build order name</th>
               <th>Villagers in dark age</th>
               <th>Perfect time to feudal age</th>
               <th>Villagers in feudal age</th>
@@ -167,105 +154,101 @@
       function toTime(seconds) {
           return Math.floor(seconds / 60).toString().padStart(2, '0') + ':' + Math.ceil(seconds % 60).toString().padStart(2, '0');
       }
+      var any = {
+        warning: null,
+        can_produce_first_villager: true,
+        dark_idle: 0,
+        loom_duration: 25,
+        start_villagers: 3,
+        feudal_villagers: 24,
+        castle_villagers: 26,
+        feudal_research_speed: 1,
+        castle_research_speed: 1,
+        feudal_villager_speed: 1,
+      };
+      var civilizations = {
+        'any': {
+          ...any
+        },
+        'chinese': {
+          ...any,
+          warning: "with Chinese, you should research loom first in dark age as you can't produce a villager until your have gathered enough food for it!",
+          can_produce_first_villager: false,
+          dark_idle: 25,
+          start_villagers: 6,
+        },
+        'goth': {
+          ...any,
+          warning: "with Goths, you can research loom first in dark age as it's researched instantly!",
+          loom_duration: 0,
+        },
+        'khmer': {
+          ...any,
+          warning: "with Khmers, you can't get to castle age faster by selling your stone, because you have to build a market for that!",
+          feudal_villagers: 22,
+          castle_villagers: 22, // TODO unless selling stone, because a market is needed
+        },
+        'malay': {
+          ...any,
+          warning: "with Malays you'll need more villagers in dark age otherwise you'll reach feudal age without enough resources!",
+          feudal_villagers: 28, // TODO for a FC, use 28+2 with Malay instead of 24+2 with regular civ
+          castle_villagers: 30,
+          feudal_research_speed: 1.66,
+          castle_research_speed: 1.66,
+        },
+        'mayan': {
+          ...any,
+          warning: "with Mayans you have to research loom first in dark age as you can't produce a villager until your first house is built!",
+          can_produce_first_villager: false,
+          start_villagers: 4,
+        },
+        'persian': {
+          ...any,
+          warning: "with Persians, you'll need three villagers to build your market or you'll lose a few seconds before clicking castle age!",
+          castle_research_speed: 1.10,
+          feudal_villager_speed: 1.10,
+        },
+      };
       function refresh() {
-        var civilization = document.getElementById('civilization').value;
-        var loom = document.getElementById('loom');
+        var civilization = civilizations[document.getElementById('civilization').value];
+        var loom = document.getElementById('loom').value
         var sell_stone = document.getElementById('sell_stone').checked;
 
-        if (civilization == 'chinese') {
-          chinese_warning.style.display = 'block';
+        if (civilization.warning != null) {
+          warning.replaceChild(document.createTextNode('Warning: ' + civilization.warning), warning.firstChild);
+          warning.style.display = 'block';
         } else {
-          chinese_warning.style.display = 'none';
+          warning.style.display = 'none';
         }
 
-        if (civilization == 'goth') {
-          goth_warning.style.display = 'block';
-        } else {
-          goth_warning.style.display = 'none';
-        }
-
-        if (civilization == 'khmer' && sell_stone) {
-          khmer_warning.style.display = 'block';
-        } else {
-          khmer_warning.style.display = 'none';
-        }
-
-        if (civilization == 'mayan') {
-          mayan_warning.style.display = 'block';
-        } else {
-          mayan_warning.style.display = 'none';
-        }
-
-        if (civilization == 'persian') {
-          persian_warning.style.display = 'block';
-        } else {
-          persian_warning.style.display = 'none';
-        }
-
-        if (['chinese', 'goth', 'mayan'].indexOf(civilization) != -1) {
-          loom.value = 'dark';
-          loom.disabled = true;
-        } else {
-          loom.disabled = false;
-        }
-
-        var loom_age = loom.value;
-
-        var start_villagers = 3;
-        if (civilization == 'chinese') {
-          start_villagers = 6;
-        } else if (civilization == 'mayan') {
-          start_villagers = 4;
-        }
-
-        var min_feudal = 24;
-        if (civilization == 'khmer') {
-          min_feudal = 22;
-        } else if (civilization == 'malay') {
-          min_feudal = 28; // TODO for a FC, use 28+2 with Malay instead of 24+2 with regular civ
-        }
         if (sell_stone) {
-          min_feudal -= 2; // TODO check if enough
-        }
-        var min_castle = 2;
-        if (civilization == 'khmer' && !sell_stone) {
-          min_castle = 0;
-        }
-
-        var feudal_research_speed = 1;
-        if (civilization == 'malay') {
-          feudal_research_speed = 1.66;
-        }
-        var castle_research_speed = 1;
-        if (civilization == 'malay') {
-          castle_research_speed = 1.66;
-        } else if (civilization == 'persian') {
-          castle_research_speed = 1.10;
+          civilization = {
+            ...civilization, 
+            feudal_villagers: civilization.feudal_villagers - 2, // TODO check if enough
+            castle_villagers: (
+              civilization.castle_villagers > civilization.feudal_villagers
+                ? civilization.castle_villagers - 2
+                : civilization.castle_villagers
+            )
+          };
         }
 
-        var villager_feudal_speed = 1;
-        if (civilization == 'persian') {
-          villager_feudal_speed = 1.10;
+        var feudal_time = civilization.dark_idle + (civilization.feudal_villagers - civilization.start_villagers) * 25 + 130 / civilization.feudal_research_speed;
+        if (loom  == 'dark' || !civilization.can_produce_first_villager) {
+          feudal_time += civilization.loom_duration;
         }
 
-        var feudal_time = (min_feudal - start_villagers) * 25 + 130 / feudal_research_speed;
-        if (civilization == 'chinese') {
-          feudal_time += 25;
-        }
-        if (loom_age == 'dark' && civilization != 'goth') {
-          feudal_time += 25;
-        }
-        var castle_time = feudal_time + min_castle * 25 / villager_feudal_speed + 160 / castle_research_speed;
-        if (loom_age == 'feudal') {
-          castle_time += 25;
+        var castle_time = feudal_time + (civilization.castle_villagers - civilization.feudal_villagers) * 25 / civilization.feudal_villager_speed + 160 / civilization.castle_research_speed;
+        if (loom  == 'feudal') {
+          castle_time += civilization.loom_duration;
         }
 
         tbody.replaceChildren();
         addRow(
-         (min_feudal + 1) + ' pop' + (castle_time < 15 * 60 ? ' fast castle' : ''),
-          min_feudal,
+         (civilization.feudal_villagers + 1) + ' pop' + (castle_time < 16 * 60 ? ' fast castle' : ''),
+          civilization.feudal_villagers,
           toTime(feudal_time),
-          '+' + min_castle,
+          civilization.castle_villagers + ' (+' + (civilization.castle_villagers - civilization.feudal_villagers) + ')',
           toTime(castle_time)
         );
       }
