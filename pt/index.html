@@ -110,9 +110,9 @@
             <tr>
               <th>Build order name</th>
               <th>Villagers in dark age</th>
-              <th>Perfect time to feudal age</th>
+              <th>Perfect feudal age time</th>
               <th>Villagers in feudal age</th>
-              <th>Perfect time to castle age</th>
+              <th>Perfect castle age time</th>
             </tr>
           </thead>
           <tbody>
@@ -237,24 +237,27 @@
 
         for (var additional_feudal_villagers of [0, 1, 2, 3]) {
           var total_feudal_villagers = civilization.feudal_villagers + additional_feudal_villagers;
-          var feudal_time = civilization.dark_idle + (total_feudal_villagers - civilization.start_villagers) * 25 + 130 / civilization.feudal_research_speed;
+          var feudal_click_time = civilization.dark_idle + (total_feudal_villagers - civilization.start_villagers) * 25;
           if (loom  == 'dark' || !civilization.can_produce_first_villager) {
-            feudal_time += civilization.loom_duration;
+            feudal_click_time += civilization.loom_duration;
           }
+          var feudal_reach_time = feudal_click_time + 130 / civilization.feudal_research_speed;
 
           var total_castle_villagers = civilization.castle_villagers + additional_feudal_villagers;
-          var castle_time = feudal_time + (civilization.castle_villagers - civilization.feudal_villagers) * 25 / civilization.feudal_villager_speed + 160 / civilization.castle_research_speed;
+          var castle_click_time = feudal_reach_time + (civilization.castle_villagers - civilization.feudal_villagers) * 25 / civilization.feudal_villager_speed;
           if (loom  == 'feudal') {
-            castle_time += civilization.loom_duration;
+            castle_click_time += civilization.loom_duration;
           }
+          var castle_reach_time = castle_click_time + 160 / civilization.castle_research_speed;
 
           addRow(
-           (total_feudal_villagers + 1) + ' pop' + (castle_time < 16 * 60 ? ' fast castle' : ''),
-            total_feudal_villagers,
-            toTime(feudal_time),
+           (total_feudal_villagers + 1) + ' pop' + (castle_reach_time < 16 * 60 ? ' fast castle' : ''),
+            total_feudal_villagers + ' (+' + (total_feudal_villagers - civilization.start_villagers) + ')',
+            toTime(feudal_click_time) + ' → ' + toTime(feudal_reach_time),
             total_castle_villagers + ' (+' + (total_castle_villagers - total_feudal_villagers) + ')',
-            toTime(castle_time)
+            toTime(castle_click_time) + ' → ' + toTime(castle_reach_time)
           );
+          // TODO show number of houses (special cases for Huns, Chinese, Incas, Slavs)
         }
       }
       document.querySelectorAll('input[type=checkbox],select').forEach(function(parameter) {
