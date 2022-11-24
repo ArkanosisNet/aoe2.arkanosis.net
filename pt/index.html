@@ -83,16 +83,24 @@
         <form action="/query">
           <ul>
             <li><label for="map">Map</label> <select id="map">
-              <option value="any">Arabia, Arena, Hideout</option>
+              <option value="any">Arabia, Arena, Black Forest, Hideout</option>
             </select></li>
             <li><label for="civilization">Civilization</label> <select id="civilization">
               <option value="any">Any</option>
+              <option value="aztecs">Aztecs</option>
+              <option value="bengalis">Bengalis</option>
               <option value="chinese">Chinese</option>
-              <option value="goth">Goth</option>
+              <option value="dravidians">Dravidians</option>
+              <option value="ethiopians">Ethiopians</option>
+              <option value="goths">Goths</option>
+              <option value="italians">Italians</option>
               <option value="khmer">Khmer</option>
               <option value="malay">Malay</option>
-              <option value="mayan">Mayan</option>
-              <option value="persian">Persian</option>
+              <option value="mayans">Mayans</option>
+              <option value="mongols">Mongols</option>
+              <option value="persians">Persians</option>
+              <option value="saracens">Saracens</option>
+              <option value="tatars">Tatars</option>
             </select></li>
             <li><label for="loom">Loom</label> <select id="loom">
               <option value="dark">In dark age</option>
@@ -160,11 +168,13 @@
       var any = {
         warning: null,
         can_produce_first_villager: true,
+        can_skip_mining_camp: false,
         dark_idle: 0,
         loom_duration: 25,
         start_villagers: 3,
         feudal_villagers: 24,
         castle_villagers: 26,
+        free_villagers_on_age_up: 0,
         feudal_research_speed: 1,
         castle_research_speed: 1,
         feudal_villager_speed: 1,
@@ -173,17 +183,45 @@
         'any': {
           ...any
         },
+        'aztecs': {
+          ...any,
+          warning: "with Aztecs, you can gather 50 gold without mining camp to click castle if you skip loom!",
+          can_skip_mining_camp: true,
+        },
+        'bengalis': {
+          ...any,
+          castle_villagers: 28,
+          free_villagers_on_age_up: 2,
+        },
         'chinese': {
           ...any,
-          warning: "with Chinese, you should research loom first in dark age as you can't produce a villager until your have gathered enough food for it!",
+          warning: "with Chinese, you should research loom first in dark age, as you can't produce a villager until your have gathered enough food for it!",
           can_produce_first_villager: false,
           dark_idle: 25,
           start_villagers: 6,
         },
-        'goth': {
+        'dravidians': {
           ...any,
-          warning: "with Goths, you can research loom first in dark age as it's researched instantly!",
+          warning: "with Dravidians, you don't need as many villagers on wood after clicking feudal age, as you'll get free wood when you'll reach feudal!",
+          feudal_villagers: 23,
+          castle_villagers: 25,
+        },
+        'ethiopians': {
+          ...any,
+          warning: "with Ethiopians, you don't need to gather gold at all to click castle if you skip loom!",
+          can_skip_mining_camp: true,
+          feudal_villagers: 23,
+          castle_villagers: 25,
+        },
+        'goths': {
+          ...any,
+          warning: "with Goths, you can research loom first in dark age, as it's researched instantly!",
           loom_duration: 0,
+        },
+        'italians': {
+          ...any,
+          feudal_villagers: 22,
+          castle_villagers: 24,
         },
         'khmer': {
           ...any,
@@ -199,17 +237,33 @@
           feudal_research_speed: 1.66,
           castle_research_speed: 1.66,
         },
-        'mayan': {
+        'mayans': {
           ...any,
-          warning: "with Mayans you have to research loom first in dark age as you can't produce a villager until your first house is built!",
+          warning: "with Mayans you have to research loom first in dark age, as you can't produce a villager until your first house is built!",
           can_produce_first_villager: false,
           start_villagers: 4,
         },
-        'persian': {
+        'mongols': {
+          ...any,
+          feudal_villagers: 23,
+          castle_villagers: 25,
+        },
+        'persians': {
           ...any,
           warning: "with Persians, you'll need three villagers to build your market or you'll lose a few seconds before clicking castle age!",
           castle_research_speed: 1.10,
           feudal_villager_speed: 1.10,
+        },
+        'saracens': {
+          ...any,
+          feudal_villagers: 23,
+          castle_villagers: 25,
+        },
+        'tatars': {
+          ...any,
+          warning: "with Tatars, you don't need as many farms to click castle age thanks to your longer lasting herdables and free sheeps!",
+          feudal_villagers: 23,
+          castle_villagers: 25,
         },
       };
       function refresh() {
@@ -224,9 +278,17 @@
           warning.style.display = 'none';
         }
 
+        if (loom == 'skip' && civilization.can_skip_mining_camp) {
+          civilization = {
+            ...civilization,
+            feudal_villagers: civilization.feudal_villagers - 1,
+            castle_villagers: civilization.castle_villagers - 1
+          };
+        }
+
         if (sell_stone) {
           civilization = {
-            ...civilization, 
+            ...civilization,
             feudal_villagers: civilization.feudal_villagers - 2, // TODO check if enough
             castle_villagers: (
               civilization.castle_villagers > civilization.feudal_villagers
@@ -247,7 +309,7 @@
           var feudal_reach_time = feudal_click_time + 130 / civilization.feudal_research_speed;
 
           var total_castle_villagers = civilization.castle_villagers + additional_feudal_villagers;
-          var castle_click_time = feudal_reach_time + (civilization.castle_villagers - civilization.feudal_villagers) * 25 / civilization.feudal_villager_speed;
+          var castle_click_time = feudal_reach_time + (civilization.castle_villagers - civilization.feudal_villagers - civilization.free_villagers_on_age_up) * 25 / civilization.feudal_villager_speed;
           if (loom  == 'feudal') {
             castle_click_time += civilization.loom_duration;
           }
