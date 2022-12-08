@@ -99,6 +99,7 @@
               <option value="mayans">Mayans</option>
               <option value="mongols">Mongols</option>
               <option value="persians">Persians</option>
+              <option value="portuguese">Portuguese</option>
               <option value="saracens">Saracens</option>
               <option value="tatars">Tatars</option>
             </select></li>
@@ -108,6 +109,7 @@
               <option value="skip">Skip</option>
             </select></li>
             <li>
+            <li><label for="portuguese_ally">Portuguese ally</label> <input type="checkbox" id="portuguese_ally"></li>
             <li><label for="sell_stone">Sell stone</label> <input type="checkbox" id="sell_stone"></li>
           </ul>
         </form>
@@ -137,7 +139,7 @@
         </ul>
       </aside>
       <p class="version">
-        PerfectTime v0.1.0 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-66692/">DoI 71094</a>)
+        PerfectTime v0.1.0 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-73855/">DoI 73855</a>)
       </p>
     </main>
     <footer>
@@ -177,6 +179,7 @@
         free_villagers_on_age_up: 0,
         feudal_research_speed: 1,
         castle_research_speed: 1,
+        tech_research_speed: 1,
         feudal_villager_speed: 1,
       };
       var civilizations = {
@@ -254,6 +257,10 @@
           castle_research_speed: 1.10,
           feudal_villager_speed: 1.10,
         },
+        'portuguese': {
+          ...any,
+          tech_research_speed: 1.25,
+        },
         'saracens': {
           ...any,
           feudal_villagers: 23,
@@ -269,6 +276,7 @@
       function refresh() {
         var civilization = civilizations[document.getElementById('civilization').value];
         var loom = document.getElementById('loom').value
+        var portuguese_ally = document.getElementById('portuguese_ally').checked;
         var sell_stone = document.getElementById('sell_stone').checked;
 
         if (civilization.warning != null) {
@@ -283,6 +291,13 @@
             ...civilization,
             feudal_villagers: civilization.feudal_villagers - 1,
             castle_villagers: civilization.castle_villagers - 1
+          };
+        }
+
+        if (portuguese_ally) {
+          civilization = {
+            ...civilization,
+            tech_research_speed: 1.25,
           };
         }
 
@@ -304,14 +319,14 @@
           var total_feudal_villagers = civilization.feudal_villagers + additional_feudal_villagers;
           var feudal_click_time = civilization.dark_idle + (total_feudal_villagers - civilization.start_villagers) * 25;
           if (loom  == 'dark' || !civilization.can_produce_first_villager) {
-            feudal_click_time += civilization.loom_duration;
+            feudal_click_time += civilization.loom_duration / civilization.tech_research_speed;
           }
           var feudal_reach_time = feudal_click_time + 130 / civilization.feudal_research_speed;
 
           var total_castle_villagers = civilization.castle_villagers + additional_feudal_villagers;
           var castle_click_time = feudal_reach_time + (civilization.castle_villagers - civilization.feudal_villagers - civilization.free_villagers_on_age_up) * 25 / civilization.feudal_villager_speed;
           if (loom  == 'feudal') {
-            castle_click_time += civilization.loom_duration;
+            castle_click_time += civilization.loom_duration / civilization.tech_research_speed;
           }
           var castle_reach_time = castle_click_time + 160 / civilization.castle_research_speed;
 
