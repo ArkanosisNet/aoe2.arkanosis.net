@@ -100,7 +100,7 @@
         </ul>
       </aside>
       <p class="version">
-        MultiProfile v0.2.0
+        MultiProfile v0.2.1
       </p>
     </main>
     <footer>
@@ -189,6 +189,10 @@
           addHeader(thead, profileIds);
           resolveNames(profileIds);
           var tbody = profiles.getElementsByTagName('tbody')[0];
+          addRow(tbody, profileIds, 'AoE2.net', [
+            ['https://aoe2.net/#aoe2de-profile-${profileId}', 'profile'],
+            ['https://aoe2.net/#aoe2de-matches-${profileId}', 'matches'],
+          ]);
           addRow(tbody, profileIds, 'Insights', [
             ['https://www.aoe2insights.com/user/${profileId}/', 'profile'],
             ['https://www.aoe2insights.com/user/${profileId}/stats/3/', '1v1'],
@@ -205,16 +209,8 @@
             ['https://aoestats.net/fr/player/${profileId}/stats', 'profile'],
             ['https://aoestats.net/fr/player/${profileId}/matches', 'matches'],
           ]);
-          addRow(tbody, profileIds, 'Nexus (dev version)', [
+          addRow(tbody, profileIds, 'Nexus', [
             ['https://dev.aoenexus.com/#profile/${profileId}', 'profile'],
-          ]);
-          addRow(tbody, profileIds, 'AoE2.net (currently broken)', [
-            ['https://aoe2.net/#profile-${profileId}', 'profile'],
-            ['https://aoe2.net/#aoe2de-matches-${profileId}', 'matches'],
-          ]);
-          addRow(tbody, profileIds, 'Nexus (currently broken)', [
-            ['https://aoenexus.com/profile/#${profileId}-3', '1v1'],
-            ['https://aoenexus.com/profile/#${profileId}-4', 'TG'],
           ]);
           addRow(tbody, profileIds, 'Overlay (currently broken)', [
             ['https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}&f=1', 'solo'],
