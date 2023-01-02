@@ -212,10 +212,11 @@
           addRow(tbody, profileIds, 'Nexus', [
             ['https://dev.aoenexus.com/#profile/${profileId}', 'profile'],
           ]);
-          addRow(tbody, profileIds, 'Overlay (currently broken)', [
-            ['https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}&f=1', 'solo'],
+          addRow(tbody, profileIds, 'Overlay', [
+            ['https://aoe2.gg/overlay/${profileId}', 'small'],
+            //['https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}&f=1', 'solo'],
             ['https://overlays.polskafan.de/rating/?profile_id=${profileId}', 'simple'],
-            ['https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}', 'detailed'],
+            //['https://lucasjappert.github.io/overlay-aoe-de/?profileid=${profileId}', 'detailed'],
           ]);
           document.getElementById('ratings').setAttribute('href', 'https://ratings.aoe2.se/?team_one=' + profileIds.join('-'));
           // TODO also add profiles of opposing team + opoosing team in rating charts
