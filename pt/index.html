@@ -89,6 +89,7 @@
               <option value="any">Any</option>
               <option value="aztecs">Aztecs</option>
               <option value="bengalis">Bengalis</option>
+              <option value="bohemians">Bohemians</option>
               <option value="chinese">Chinese</option>
               <option value="dravidians">Dravidians</option>
               <option value="ethiopians">Ethiopians</option>
@@ -195,6 +196,11 @@
           ...any,
           castle_villagers: 28,
           free_villagers_on_age_up: 2,
+        },
+        'bohemians': {
+          ...any,
+            warning: "with Bohemians, you can gather 100 gold without mining camp to click castle if you skip loom, by sending only 5 villagers right after reaching feodal!",
+          can_skip_mining_camp: true,
         },
         'chinese': {
           ...any,
