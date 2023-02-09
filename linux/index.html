@@ -220,9 +220,9 @@
             </ol>
             <p>At this point, the game should work fine… until a driver update restores the Intel Vulkan ICD (at which point you just have to run the same command again).</p>
             <aside class="details">
-              <p>The above workaround is a “I want to play NOW”-level workaround: it makes the Intel Vulkan ICD temporarily unusable, but doesn't remove it completely from the system. If you think you don't need the Intel Vulkan ICD at all, a cleaner approach would be to uninstall it. Unfortunately, some Linux distributions put all Vulkan ICDs in a single package, making it impossible to uninstall only one of them (for example, Debian and Ubuntu ship the Intel, the Radeon and the Lavapipe ICDs together in the same <code>mesa-vulkan-drivers</code> package).</p>
+              <p>The above workaround is a “I want to play NOW”-level workaround: it makes the Intel Vulkan ICD temporarily unusable, but doesn't remove it completely from the system. If you think you don't need the Intel Vulkan ICD at all, a cleaner approach would be to uninstall it. Unfortunately, some Linux distributions put all Vulkan ICDs in a single package, making it impossible to uninstall only one of them (for example, Debian, Ubuntu, Mint and Pop!_OS ship the Intel, the Radeon and the Lavapipe ICDs together in the same <code>mesa-vulkan-drivers</code> package).</p>
               <p>On a Linux distribution which ships Vulkan ICDs in separate packages, uninstalling the unused ICDs would work around the problem with the advantage of not having the unused ICDs restored every time there's a driver update.</p>
-              <p>For example, on ArchLinux, the cleaner workaround would be:</p>
+              <p>For example, on ArchLinux and Manjaro, the cleaner workaround would be:</p>
               <ol>
                 <li>Open a terminal.</li>
                 <li>Execute the following command.<ul>
