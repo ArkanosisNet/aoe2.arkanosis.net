@@ -208,7 +208,7 @@
               The game disapears after the splash screen on a Nvidia Optimus laptop
             </h4>
             <p style="font-style: italic;">Sometimes, it disappears silently, sometimes with an error message about graphics display resolution, minimum requirements and “<code>CreateSwapChain() failed!</code>”.</p>
-            <p>Nvidia Optimus laptops have two <abbr title="graphical processing units">GPUs</abbr>: one Intel <abbr title="integrated graphical processing unit">iGPU</abbr> within the <abbr title="central processing unit">CPU</abbr> and one Nvidia <abbr title="discrete graphical processing unit">dGPU</abbr> in a graphics card. The iGPU is power-efficient and prefered for light tasks (like web browsing) whereas the dGPU is powerful and prefered for heavy tasks (like gaming).</p>
+            <p>Nvidia Optimus laptops have two <abbr title="graphical processing units">GPUs</abbr>: one Intel <abbr title="integrated graphical processing unit">iGPU</abbr> within the <abbr title="central processing unit">CPU</abbr> and one Nvidia <abbr title="discrete graphical processing unit">dGPU</abbr> in a graphics card. The iGPU is power-efficient and preferred for light tasks (like web browsing) whereas the dGPU is powerful and prefered for heavy tasks (like gaming).</p>
             <p>With some combinations of AoE2:DE and Proton, there's a known bug which causes Proton to use an Intel Vulkan <abbr title="installable client driver">ICD</abbr> on the Nvidia dGPU, which obviously can't work.</p>
             <p>The only reliable workaround I'm aware of unfortunately prevents you from using the Intel Vulkan ICD. But, well… it works.</p>
             <ol>
@@ -221,7 +221,7 @@
             <p>At this point, the game should work fine… until a driver update restores the Intel Vulkan ICD (at which point you just have to run the same command again).</p>
             <aside class="details">
               <p>The above workaround is a “I want to play NOW”-level workaround: it makes the Intel Vulkan ICD temporarily unusable, but doesn't remove it completely from the system. If you think you don't need the Intel Vulkan ICD at all, a cleaner approach would be to uninstall it. Unfortunately, some Linux distributions put all Vulkan ICDs in a single package, making it impossible to uninstall only one of them (for example, Debian and Ubuntu ship the Intel, the Radeon and the Lavapipe ICDs together in the same <code>mesa-vulkan-drivers</code> package).</p>
-              <p>On a Linux distribution which ships Vulkan ICDs in separate packages, uninstalling the unused ICDs would work around the problem with the advantage of not having the unused ICDs restored everytime there's a driver update.</p>
+              <p>On a Linux distribution which ships Vulkan ICDs in separate packages, uninstalling the unused ICDs would work around the problem with the advantage of not having the unused ICDs restored every time there's a driver update.</p>
               <p>For example, on ArchLinux, the cleaner workaround would be:</p>
               <ol>
                 <li>Open a terminal.</li>
@@ -253,7 +253,7 @@
             <p>At this point, the game should work fine… but you should make sure you've uninstalled the drivers for the old GPU, otherwise a driver update will restore the old Vulkan ICD (at which point you just have to run the same command again).</p>
             <aside class="details">
               <p>The above workaround is a “I want to play NOW”-level workaround: it makes the unused Vulkan ICD temporarily unusable, but doesn't remove it completely from the system. Unless you keep both GPUs in your system, you certainly want to uninstall the drivers for the old GPU. Unfortunately, some Linux distributions put all Vulkan ICDs in a single package, making it impossible to uninstall only one of them (for example, Debian and Ubuntu ship the Intel, the Radeon and the Lavapipe ICDs together in the same <code>mesa-vulkan-drivers</code> package).</p>
-              <p>On a Linux distribution which ships Vulkan ICDs in separate packages, uninstalling the unused ICDs will prevent them from being restored everytime there's a driver update.</p>
+              <p>On a Linux distribution which ships Vulkan ICDs in separate packages, uninstalling the unused ICDs will prevent them from being restored every time there's a driver update.</p>
               <p>For example, on ArchLinux, uninstalling would look like:</p>
               <ol>
                 <li>Open a terminal.</li>
@@ -411,7 +411,7 @@
         <p>That's an interesting question. I assumed you already had an opinion on this, but if you don't, here are some thoughts:</p>
         <ul>
           <li>AoE2 won't work better on Linux than on Windows. If you observe slightly better performance than on Windows, that's because the operating system itself, or other programs running on it (antivirus, bloatware, malware…) were interfering with the game.</li>
-          <li>AoE2 won't work worse on Linux than on Windows. That being said, as the game is developed for Windows and not for Linux, you may have to apply some tweaks (discussed above) and possibly apply them again everytime there's an update.</li>
+          <li>AoE2 won't work worse on Linux than on Windows. That being said, as the game is developed for Windows and not for Linux, you may have to apply some tweaks (discussed above) and possibly apply them again every time there's an update.</li>
           <li>Linux-based operating systems and Windows are, well, different operating systems. Don't expect them to work exactly the same. If you already use Linux or want to switch to it, then you have the possibility to play AoE2 just fine on it — you don't need to use Windows. If you don't want to switch to Linux, then AoE2 alone is not a good reason to change your mind (there are, however, many valid reasons to want to switch to a Linux-based operating system, but that's off-topic).</li>
         </ul>
         <p>All in all, I'd say: play on your operating system of choice; don't let anybody else chose your operating system for you.</p>
