@@ -171,7 +171,7 @@
           <ol>
             <li>Quit the game (it is important that you have started it at least once before the next step).</li>
             <li>Open a terminal.</li>
-            <li>Execute the following commands (every single character is important, including the quotes).<ul>
+            <li>Execute the following commands (every single character is important, including the quotes):<ul>
                 <li><code>cd "$(mktemp -d)"</code></li>
                 <li><code>wget "https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x64.exe"</code></li>
                 <li><code>cabextract vc_redist.x64.exe</code></li>
@@ -187,21 +187,21 @@
             <p>For example, on ArchLinux and Manjaro, you'd install them as follow:</p>
             <ol>
               <li>Open a terminal.</li>
-              <li>Execute the following command.<ul>
+              <li>Execute the following command:<ul>
                   <li><code>sudo pacman -S wget cabextract</code></li>
               </ul></li>
             </ol>
             <p>On Debian, Ubuntu, Mint and Pop!_OS, you'd install them as follow:</p>
             <ol>
               <li>Open a terminal.</li>
-              <li>Execute the following command.<ul>
+              <li>Execute the following command:<ul>
                   <li><code>sudo apt install wget cabextract</code></li>
               </ul></li>
             </ol>
             <p>It is a bit more complex on a Steam Deck with SteamOS, because the filesystem is read-only by default, so you'd install them as follow:</p>
             <ol>
               <li>Open a terminal.</li>
-              <li>Execute the following command.<ul>
+              <li>Execute the following commands:<ul>
                   <li><code>sudo steamos-readonly disable</code></li>
                   <li><code>sudo pacman-key --init</code></li>
                   <li><code>sudo pacman-key --populate archlinux</code></li>
@@ -218,7 +218,7 @@
           </h3>
           <p>The most interoperable way to have <code>aoe2de://</code> links opened in the game is probably to configure an XDG scheme handler for that.</p>
           <ol>
-            <li>Create a file called <code>~/.local/share/applications/aoe2de.desktop</code> with the following content
+            <li>Create a file called <code>~/.local/share/applications/aoe2de.desktop</code> with the following content:
             <pre>
               [Desktop Entry]
               Type=Application
@@ -249,7 +249,7 @@
             <p>The only reliable workaround I'm aware of unfortunately prevents you from using the Intel Vulkan ICD. But, well… it works.</p>
             <ol>
               <li>Open a terminal.</li>
-              <li>Execute the following command.<ul>
+              <li>Execute the following command:<ul>
                   <li><code>sudo mv /usr/share/vulkan/icd.d/intel_icd.x86_64.json /usr/share/vulkan/icd.d/intel_icd.x86_64.json.disabled</code></li>
               </ul></li>
               <li>Start the game again.</li>
@@ -261,7 +261,7 @@
               <p>For example, on ArchLinux and Manjaro, the cleaner workaround would be:</p>
               <ol>
                 <li>Open a terminal.</li>
-                <li>Execute the following command.<ul>
+                <li>Execute the following command:<ul>
                     <li><code>sudo pacman -R vulkan-intel</code></li>
                 </ul></li>
                 <li>Start the game again.</li>
@@ -279,7 +279,7 @@
             <p>The only reliable workaround I'm aware of unfortunately prevents you from using two Vulkan ICDs at the same time. But, well… it works.</p>
             <ol>
               <li>Open a terminal.</li>
-              <li>Execute one of the following command (depending on your graphics cards).<ul>
+              <li>Execute one of the following commands (depending on your graphics cards):<ul>
                   <li><code>sudo mv /usr/share/vulkan/icd.d/nvidia_icd.x86_64.json /usr/share/vulkan/icd.d/nvidia_icd.x86_64.json.disabled</code> (if you switch from Nvidia to AMD)</li>
                   <li><code>sudo mv /usr/share/vulkan/icd.d/radeon_icd.x86_64.json /usr/share/vulkan/icd.d/radeon_icd.x86_64.json.disabled</code> (if you switch from AMD to Nvidia)</li>
               </ul></li>
@@ -293,7 +293,7 @@
               <p>For example, on ArchLinux and Manjaro, the cleaner workaround would be:</p>
               <ol>
                 <li>Open a terminal.</li>
-                <li>Execute the following command.<ul>
+                <li>Execute one of the following commands:<ul>
                     <li><code>sudo pacman -R nvidia-utils</code> (if you switch from Nvidia to AMD)</li>
                     <li><code>sudo pacman -R vulkan-radeon</code> (if you switch from AMD to Nvidia)</li>
                 </ul></li>
