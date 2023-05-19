@@ -102,6 +102,26 @@
       h2:hover .anchor, h3:hover .anchor, h4:hover .anchor {
         visibility: visible;
       }
+      @media(min-width: 1600px) {
+        nav {
+          position: fixed;
+        }
+      }
+      nav {
+        margin: 0 auto;
+        max-width: 100ex;
+        line-height: 2em;
+      }
+      nav h2 {
+        padding-left: 15px;
+      }
+      nav ul {
+        list-style: none;
+        padding-left: 15px;
+      }
+      nav a:active {
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
@@ -112,6 +132,27 @@
     <p id="noresult" class="warning">
       Disclaimer: the length of the page may give the impression that this is going to be difficult. It really isn't. Keep on reading :)
     </p>
+    <nav>
+      <h2>Table of content</h2>
+      <ul>
+        <li><a href="#which_version_of_aoe2_should_i_play">Which version of AoE2 should I play?</a></li>
+        <li><a href="#can_i_play_aoe2_on_a_steam_deck">Can I play AoE2 on a Steam Deck?</a></li>
+        <li>How do I play?<ul>
+          <li><a href="#how_do_i_play_aoe2_de_on_linux">The Definitive Edition</a><ul>
+            <li><a href="#how_do_i_play_aoe2_de_on_linux">Single player</a></li>
+            <li><a href="#aoe2_de_online_multiplayer">Online multiplayer</a></li>
+            <li><a href="#aoe2_de_spectating_games_or_joining_lobbies">Spectating games / joining lobbies</a></li>
+            <li><a href="#aoe2_de_troubleshooting">Troubleshooting</a></li>
+          </ul></li>
+          <li><a href="#how_do_i_play_aoe2_hd_on_linux">The HD Edition</a></li>
+          <li><a href="#how_do_i_play_aoe2_aok_tc_on_linux">The Age of Kings / The Conquerors</a></li>
+        </ul></li>
+        <li><a href="#how_do_i_play_aoe2_on_lan_on_linux">How do I play Age of Empires II on LAN?</a></li>
+        <li><a href="#how_do_i_use_capture_age_on_linux">How do I use CaptureAge?</a></li>
+        <li><a href="#should_i_play_on_linux">Should I play on Linux?</a></li>
+        <li><a href="#acknowledgements">Acknowledgements</a></li>
+      </ul>
+    </nav>
     <main style="padding: 10px">
       <section>
         <h2 id="which_version_of_aoe2_should_i_play">
@@ -163,11 +204,11 @@
             <li>Start the game.</li>
           </ol>
           <p>At this point, the game should work fine <em>in single player mode</em>. If you want to play <em><u>online multiplayer</u></em>, however, keep on reading.</p>
-	  <aside class="details">
-	    <p>
-	       You may wonder why Proton 7.0 might handle older GPUs better than Proton 8.0. That's because Proton 8.0 and above require a GPU that supports Vulkan 1.3.
-	    </p>
-	  </aside>
+          <aside class="details">
+            <p>
+               You may wonder why Proton 7.0 might handle older GPUs better than Proton 8.0. That's because Proton 8.0 and above require a GPU that supports Vulkan 1.3.
+            </p>
+          </aside>
         </section>
         <section>
           <h3 id="aoe2_de_online_multiplayer">
@@ -469,7 +510,7 @@
         <p>Thanks everyone, GL HF!</p>
       </section>
       <p class="version">
-        Last update (<a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">changelog</a>) on 2023-05-18 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-83607/">RoR 83607</a>)
+        Last update (<a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">changelog</a>) on 2023-05-19 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-83607/">RoR 83607</a>)
       </p>
     </main>
     <footer>
