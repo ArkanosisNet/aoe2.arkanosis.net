@@ -144,7 +144,7 @@
       Important: since 2023-06-27 and the release of <a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-87863/">update 87863</a>, Age of Empires II : Definitive Edition is temporarily broken on Linux (including on the Steam Deck) and macOS.
       <br>
       A fix is available in <a href="https://github.com/ValveSoftware/Proton/issues/3189#issuecomment-1613741966">the “bleeding-edge” beta branch of Proton Experimental</a>.
-      Alternatively, you can try <a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/releases/tag/proton-8.0-2c-10-aoe2-wa1">this custom build of Proton 8.0-2</a> which includes a workaround.
+      Alternatively, you can try <a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/releases/tag/proton-8.0-2c-10-aoe2-wa1">this custom build of Proton 8.0-2</a> which includes a workaround, or <a href="https://github.com/GloriousEggroll/proton-ge-custom/releases/tag/GE-Proton8-6">Proton GE 8.6</a>.
     </p>
     <p class="warning">
       Disclaimer: the length of the page may give the impression that this is going to be difficult. It really isn't. Keep on reading :)
@@ -216,7 +216,7 @@
             <li>Go to the “Steam Play” section (1) and check the “Enable Steam Play for all other titles” box (2). You can leave the “Run other titles with” dropdown list (3) to its default value (the latest hopefully the better — Proton 8.0-1, 8.0-2 and Experimental may require reasonably recent <abbr title="graphical processing units">GPUs</abbr>, 7.0-5 was fine with even older GPUs).</li>
             <a href="./2.png"><img src="./2.png" alt="Screenshot of the Steam client “Settings” window, on the “Steam Play” tab, with the “Enable Steam Play for all other titles” box checked"></a>
             <li>Now, AoE2:DE should be available in your Steam library as it would be if you were on Windows. Install the game.</li>
-            <li>If you chose Proton 8.0-1, 8.0-2 or Experimental at step 4, or if you don't want the introduction video, go to your “Library” (1), right click “Age of Empires II: Definitive Edition” (2), click “Properties” (3), then “General“ (4) and type <tt>SKIPINTRO</tt> in the “Launch options”.</li>
+            <li>If you chose Proton 8.0-1, 8.0-2 or Experimental at step 4, or if you don't want the introduction video, go to your “Library” (1), right click “Age of Empires II: Definitive Edition” (2), click “Properties” (3), then “General“ (4) and type <tt>SKIPINTRO</tt> in the “Launch options” (5).</li>
             <a href="./3.png"><img src="./3.png" alt="Screenshot of the Steam client “Settings” window, on the “Steam Play” tab, with the “Enable Steam Play for all other titles” box checked"></a>
             <li>Start the game.</li>
           </ol>
@@ -369,6 +369,21 @@
                 <li>Start the game again.</li>
               </ol>
             </aside>
+          </section>
+          <section>
+            <h4 id="aoe2_de_troubleshooting_old_gpu">
+              <a href="#aoe2_de_troubleshooting_old_gpu" class="anchor" aria-hidden="true">§</a>
+              The game disappears after the splash screen on an old GPU
+            </h4>
+            <p style="font-style: italic;">Sometimes, it disappears silently, sometimes with an error message about graphics display resolution, minimum requirements and “<code>CreateSwapChain() failed!</code>”.</p>
+            <p>To implement the Direct3D <abbr title="application programming interface">API</abbr> on Linux, Proton uses two tools called DXVK et Vkd3d, which rely on the Vulkan API available on recent GPUs. Proton 8.0 and onwards even require a GPU that supports Vulkan 1.3.</p>
+            <p>On older GPUs, it is possible to use another tool called WineD3D instead, which rely on the older and more widely supported OpenGL API. Expect lower performance, but better compatibility with older GPUs when using WineD3D.</p>
+            <p>To use WineD3D and OpenGL:</p>
+            <ol>
+              <li>Go to your “Library” (1), right click “Age of Empires II: Definitive Edition” (2), click “Properties” (3), then “General“ (4) and type <tt>PROTON_USE_WINED3D=1 %command%</tt> in the “Launch options” (5).</li>
+              <a href="./3.png"><img src="./3.png" alt="Screenshot of the Steam client “Settings” window, on the “Steam Play” tab, with the “Enable Steam Play for all other titles” box checked"></a>
+              <li>Start the game.</li>
+            </ol>
           </section>
         </section>
         <aside>
@@ -531,7 +546,7 @@
         <p>Thanks everyone, GL HF!</p>
       </section>
       <p class="version">
-        Last update (<a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">changelog</a>) on 2023-06-30 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-87863/">RoR 87863</a>)
+        Last update (<a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">changelog</a>) on 2023-07-07 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-87863/">RoR 87863</a>)
       </p>
     </main>
     <footer>
