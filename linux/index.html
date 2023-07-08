@@ -145,6 +145,7 @@
       <br>
       A fix is available in <a href="https://github.com/ValveSoftware/Proton/issues/3189#issuecomment-1613741966">the “bleeding-edge” beta branch of Proton Experimental</a>.
       Alternatively, you can try <a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/releases/tag/proton-8.0-2c-10-aoe2-wa1">this custom build of Proton 8.0-2</a> which includes a workaround, or <a href="https://github.com/GloriousEggroll/proton-ge-custom/releases/tag/GE-Proton8-6">Proton GE 8.6</a>.
+      If you have an older GPU, you can try <a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/releases/tag/proton-7.0-6e-aoe2-wa1">this custom build of the older Proton 7.0-6</a> which includes the same workaround.
     </p>
     <p class="warning">
       Disclaimer: the length of the page may give the impression that this is going to be difficult. It really isn't. Keep on reading :)
@@ -309,7 +310,7 @@
           </h3>
           <section>
             <h4 id="aoe2_de_troubleshooting_nvidia_optimus">
-              <a href="#aoe2_de_troubleshooting_nvidia_optimus" class="anchor" aria-hidden="true">§</a>
+              <a href="#aoe2_de_troubleshooting_nvidia_optimus" class="anchor" aria-hidden="true">§</a><!-- TODO try DXVK_FILTER_DEVICE_NAME="NVIDIA" %command% NOSTARTUP SKIPINTRO -->
               The game disappears after the splash screen on a Nvidia Optimus laptop
             </h4>
             <p style="font-style: italic;">Sometimes, it disappears silently, sometimes with an error message about graphics display resolution, minimum requirements and “<code>CreateSwapChain() failed!</code>”.</p>
@@ -375,7 +376,7 @@
               <a href="#aoe2_de_troubleshooting_old_gpu" class="anchor" aria-hidden="true">§</a>
               The game disappears after the splash screen on an old GPU
             </h4>
-            <p style="font-style: italic;">Sometimes, it disappears silently, sometimes with an error message about graphics display resolution, minimum requirements and “<code>CreateSwapChain() failed!</code>”.</p>
+            <p style="font-style: italic;">Sometimes, it disappears silently, sometimes with an error message about graphics accelerator with DirectX 11 support, graphics display resolution, minimum requirements and “<code>CreateSwapChain() failed!</code>”.</p>
             <p>To implement the Direct3D <abbr title="application programming interface">API</abbr> on Linux, Proton uses two tools called DXVK et Vkd3d, which rely on the Vulkan API available on recent GPUs. Proton 8.0 and onwards even require a GPU that supports Vulkan 1.3.</p>
             <p>On older GPUs, it is possible to use another tool called WineD3D instead, which rely on the older and more widely supported OpenGL API. Expect lower performance, but better compatibility with older GPUs when using WineD3D.</p>
             <p>To use WineD3D and OpenGL:</p>
@@ -546,7 +547,7 @@
         <p>Thanks everyone, GL HF!</p>
       </section>
       <p class="version">
-        Last update (<a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">changelog</a>) on 2023-07-07 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-87863/">RoR 87863</a>)
+        Last update (<a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">changelog</a>) on 2023-07-08 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-87863/">RoR 87863</a>)
       </p>
     </main>
     <footer>
