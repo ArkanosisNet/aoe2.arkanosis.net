@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AoFi — a minimal, ergonomic, one-handed keyboard for Age of Empires II</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Home page of the AoFi, a minimal, ergonomic, one-handed keyboard for Age of Empires II">
+    <link rev="made" href="mailto:jroquet@arkanosis.net" />
+    <link rel="canonical" href="https://aoe2.arkanosis.net/aofi/" />
+    <style>
+      * {
+        color: #212529;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        color: #24478f;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      header, footer {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        background-color: #eaecf0;
+      }
+      footer {
+        bottom:0;
+      }
+      main {
+        margin: 0 auto;
+        max-width: 100ex;
+        text-align: justify;
+        hyphens: auto;
+      }
+      form {
+        padding: 15px;
+      }
+      .info {
+        margin: 15px auto;
+        max-width: 100ex;
+        padding: 15px;
+        background-color: #d1ecf1;
+        border-color: #bee5eb;
+        border-radius: 4px;
+      }
+      .info, .info strong {
+        color: #3e656b;
+      }
+      .warning {
+        margin: 15px auto;
+        max-width: 100ex;
+        padding: 15px;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+        border-radius: 4px;
+      }
+      .warning, .warning strong, .warning ul li {
+        color: #8a6d3b;
+      }
+      .error {
+        margin: 15px auto;
+        max-width: 100ex;
+        padding: 15px;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        border-radius: 4px;
+      }
+      .error, .error strong {
+        color: #721c24;
+      }
+      .details {
+        background-color: #eaecf0;
+        padding: 0 15px;
+        border-style: dashed;
+        border-color: gray;
+      }
+      .version {
+        margin-bottom: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        text-align:right;
+      }
+      table {
+        text-align: left;
+        width: 100%;
+      }
+      th, td {
+        border-bottom: 1px solid #ddd;
+      }
+      tr:hover {
+        background-color: #f5f5f5;
+      }
+      td span {
+        text-decoration: underline dotted #24478f;
+      }
+      img {
+        max-width: 95%;
+      }
+      pre {
+        white-space: pre-line;
+      }
+      code, pre, tt {
+        background-color: #eaecf0;
+      }
+      .details code, .details pre, .details tt {
+        background-color: white;
+      }
+      .anchor {
+        margin-left: -1em;
+        color: gray;
+        visibility: hidden;
+      }
+      h2:hover .anchor, h3:hover .anchor, h4:hover .anchor {
+        visibility: visible;
+      }
+      @media(min-width: 1600px) {
+        nav {
+          position: fixed;
+        }
+      }
+      nav {
+        margin: 0 auto;
+        max-width: 100ex;
+        line-height: 2em;
+      }
+      nav h2 {
+        padding-left: 15px;
+      }
+      nav ul {
+        list-style: none;
+        padding-left: 15px;
+      }
+      nav a:active {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <!--<img src="logo.svg" alt="AoE2 on Linux logo" width="120" height="120" style="padding: 10px;">-->
+      <div style="margin-left: 10px; padding: 10px;"><h1 style="font-size: 50px; margin:0;">AoFi</h1></div>
+    </header>
+    <p class="warning">
+      Disclaimer: the AoFi is not yet ready for use :)
+    </p>
+    <main style="padding: 10px">
+      <section>
+        <h2>
+          What is the AoFi?
+        </h2>
+        <p>The AoFi is a minimal, ergonomic, one-handed keyboard for Age of Empires II.</p>
+        <p><a href="./aofi.png"><img src="./aofi.png" alt="Layout of the AoFi"></a></p>
+        <p>It is based on Ray Cheng's <a href="https://github.com/raychengy/fifi_split_keeb">Fifi</a> and <a href="https://qmk.fm/">QMK</a>.</p>
+      </section>
+      <p class="version">
+        Last update (<a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">changelog</a>) on 2023-10-14
+      </p>
+    </main>
+    <footer>
+      <p style="width: 100%; text-align: center;">
+        Made by <a href="https://arkanosis.net">Arkanosis</a>.
+        Text available <a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net">on GitHub</a> under the <a href="https://creativecommons.org/licenses/by/4.0/deed">the CC-BY 4.0 license</a>.
+      </p>
+    </footer>
+  </body>
+</html>
