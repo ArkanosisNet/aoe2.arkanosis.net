@@ -140,7 +140,7 @@
         </ul>
       </aside>
       <p class="version">
-        PerfectTime v0.1.0 (<a href="https://www.ageofempires.com/news/preview-age-of-empires-ii-definitive-edition-update-95810/">TMR 96976</a>)
+        PerfectTime v0.1.0 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-99311/">TMR 99404</a>)
       </p>
     </main>
     <footer>
@@ -181,6 +181,7 @@
         feudal_research_speed: 1,
         castle_research_speed: 1,
         tech_research_speed: 1,
+        dark_villager_speed: 1,
         feudal_villager_speed: 1,
       };
       var civilizations = {
@@ -261,6 +262,7 @@
           ...any,
           warning: "with Persians, you'll need three villagers to build your market or you'll lose a few seconds before clicking castle age!",
           castle_research_speed: 1.10,
+          dark_villager_speed: 1.05,
           feudal_villager_speed: 1.10,
         },
         'portuguese': {
@@ -323,16 +325,16 @@
 
         for (var additional_feudal_villagers of [0, 1, 2, 3]) {
           var total_feudal_villagers = civilization.feudal_villagers + additional_feudal_villagers;
-          var feudal_click_time = civilization.dark_idle + (total_feudal_villagers - civilization.start_villagers) * 25;
+          var feudal_click_time = civilization.dark_idle + (total_feudal_villagers - civilization.start_villagers) * 25 / civilization.dark_villager_speed;
           if (loom  == 'dark' || !civilization.can_produce_first_villager) {
-            feudal_click_time += civilization.loom_duration / civilization.tech_research_speed;
+            feudal_click_time += civilization.loom_duration / civilization.tech_research_speed / civilization.dark_villager_speed;
           }
           var feudal_reach_time = feudal_click_time + 130 / civilization.feudal_research_speed;
 
           var total_castle_villagers = civilization.castle_villagers + additional_feudal_villagers;
           var castle_click_time = feudal_reach_time + (civilization.castle_villagers - civilization.feudal_villagers - civilization.free_villagers_on_age_up) * 25 / civilization.feudal_villager_speed;
           if (loom  == 'feudal') {
-            castle_click_time += civilization.loom_duration / civilization.tech_research_speed;
+            castle_click_time += civilization.loom_duration / civilization.tech_research_speed / civilization.feudal_villager_speed;
           }
           var castle_reach_time = castle_click_time + 160 / civilization.castle_research_speed;
 
