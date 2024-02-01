@@ -26,6 +26,11 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://aoe2.arkanosis.net/overlay/</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://aoe2.arkanosis.net/pt/</loc>
     <lastmod>2023-12-14</lastmod>
     <changefreq>weekly</changefreq>
