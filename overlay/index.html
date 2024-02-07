@@ -68,7 +68,7 @@
         </p>
       </section>
       <p class="version">
-        Overlay v0.0.1 (very alpha)
+        Overlay v0.0.2 (very alpha)
       </p>
     </main>
     <footer>
@@ -78,6 +78,31 @@
       </p>
     </footer>
     <script type="text/javascript">
+      var playerCache = {};
+      async function processPlayer(player) {
+        const match = player.match(/(........)(.+) \(([0-9]+\) as \w+)/);
+        const playerTags = match[1];
+        const playerName = match[2];
+        const playerInfo = match[3];
+        if (playerCache[playerName] === undefined) {
+          const response = await fetch(`https://legacy.aoe2companion.com/api/nightbot/rank?search=${playerName}`);
+          if (response.status === 200) {
+            const data = await response.json();
+            const match = data.match(/.* \(([0-9]+)\) Rank .*/);
+            playerCache[playerName] = playerTags + playerName + ' (' + (match != null ? match[1] : '?') + ' - ';
+          } else {
+            playerCache[playerName] = playerTags + playerName + ' (? - ';
+          }
+        }
+        return playerCache[playerName] + playerInfo;
+      }
+      async function processTeam(team) {
+        var processedTeam = '';
+        for (player of team.split(" + ")) {
+          processedTeam += (await processPlayer(player) + ' + ');
+        }
+        return processedTeam.substring(0, processedTeam.length - 2);
+      }
       function initialize() {
         if (window.location.hash === "") {
           var profileId = prompt("Please enter a profile id");
@@ -94,8 +119,8 @@
             const data = await response.json();
             const players = data.split(" playing")[0];
             const teams = players.split(" vs ");
-            team1.replaceChild(document.createTextNode(teams[0]), team1.firstChild);
-            team2.replaceChild(document.createTextNode(teams[1]), team2.firstChild);
+            team1.replaceChild(document.createTextNode(await processTeam(teams[0])), team1.firstChild);
+            team2.replaceChild(document.createTextNode(await processTeam(teams[1])), team2.firstChild);
           }
           setTimeout(refresh, 30000);
         }
