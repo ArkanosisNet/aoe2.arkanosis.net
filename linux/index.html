@@ -403,6 +403,30 @@
               <a href="./4.png"><img src="./4.png" alt="Screenshot of the Steam client “Properties” window for “Age of Empires II: Definitive Edition”, on the “General” tab, with the “PROTON_USE_WINED3D=1 %command%” launch option"></a>
               <li>Start the game.</li>
             </ol>
+	    <aside class="details">
+	      <p>To know if your GPU supports Vulkan 1.3, you can use the <code>vulkaninfo</code> command, which on most distributions is available in the <code>vulkan-tools</code> package.</p>
+	      <p>For example, on ArchLinux and Manjaro, you'd install the package as follow:</p>
+	      <ol>
+		<li>Open a terminal.</li>
+		<li>Execute the following command:<ul>
+		    <li><code>sudo pacman -S vulkan-tools</code></li>
+		</ul></li>
+	      </ol>
+	      <p>On Debian, Ubuntu, Mint and Pop!_OS, you'd install the package as follow:</p>
+	      <ol>
+		<li>Open a terminal.</li>
+		<li>Execute the following command:<ul>
+		    <li><code>sudo apt install vulkan-tools</code></li>
+		</ul></li>
+	      </ol>
+	      <p>Then, on all distributions:</p>
+	      <ol>
+		<li>Execute the following command:<ul>
+		    <li><code>vulkaninfo | grep apiVersion</code></li>
+		</ul></li>
+	      </ol>
+	      <p>The output should contain the version of Vulkan your GPU supports: <code>1.2.*</code>, <code>1.3.*</code>.</p>
+	    </aside>
           </section>
           <section>
             <h4 id="aoe2_de_troubleshooting_low_fps">
@@ -579,7 +603,7 @@
         <p>Thanks everyone, GL HF!</p>
       </section>
       <p class="version">
-        Last update (<a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">changelog</a>) on 2024-01-01 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-99311/">TMR 99404</a>)
+        Last update (<a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">changelog</a>) on 2024-02-18 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-99311/">TMR 99404</a>)
       </p>
     </main>
     <footer>
