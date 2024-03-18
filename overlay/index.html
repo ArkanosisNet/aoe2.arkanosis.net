@@ -60,7 +60,6 @@
       <section>
         <h2>Current match</h2>
         <p id="match">
-          <big>No match found.</big>
           <br>
           <big id="team1">-</big>
           <br>
@@ -113,14 +112,18 @@
         var match = document.getElementById("match");
         var team1 = document.getElementById("team1");
         var team2 = document.getElementById("team2");
-        async function refresh() {  
-          const response = await fetch(`https://legacy.aoe2companion.com/api/nightbot/match?profile_id=${profileId}`);
-          if (response.status === 200) {
-            const data = await response.json();
-            const players = data.split(" playing")[0];
-            const teams = players.split(" vs ");
-            team1.replaceChild(document.createTextNode(await processTeam(teams[0])), team1.firstChild);
-            team2.replaceChild(document.createTextNode(await processTeam(teams[1])), team2.firstChild);
+        async function refresh() {
+          try {
+              const response = await fetch(`https://legacy.aoe2companion.com/api/nightbot/match?profile_id=${profileId}`);
+              if (response.status === 200) {
+                const data = await response.json();
+                const players = data.split(" playing")[0];
+                const teams = players.split(" vs ");
+                team1.replaceChild(document.createTextNode(await processTeam(teams[0])), team1.firstChild);
+                team2.replaceChild(document.createTextNode(await processTeam(teams[1])), team2.firstChild);
+              }
+          } catch (e) {
+            // nothing
           }
           setTimeout(refresh, 30000);
         }
@@ -130,4 +133,5 @@
       }
       initialize();
     </script>
-</body></html>
+  </body>
+</html>
