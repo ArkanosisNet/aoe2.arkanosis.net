@@ -99,7 +99,7 @@
       function initialize() {
         if (window.location.hash === "") {
           var profileId = prompt("Please enter a profile id");
-          window.location.hash = '#' + parameters;
+          window.location.hash = '#' + profileId;
         } else {
           var profileId = window.location.hash.substring(1);
         }
