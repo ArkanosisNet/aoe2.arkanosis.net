@@ -38,9 +38,8 @@
       footer {
         bottom:0;
       }
-      big {
+      #match {
         font-size: 2em;
-        line-height: 3em;
       }
       .version {
           margin-bottom: 0;
@@ -57,17 +56,14 @@
       <div style="margin-left: 10px; padding: 10px;"><h1 style="font-size: 50px; margin:0;">AoE2 Overlay (based on <a href="https://www.aoe2companion.com/">AoE II Companion</a>)</h1></div>
     </header>
     <main style="padding: 10px">
-      <section>
+      <section id="match">
         <h2>Current match</h2>
-        <p id="match">
-          <br>
-          <big id="team1">-</big>
-          <br>
-          <big id="team2">-</big>
-        </p>
+        <ul id="team1"></ul>
+        <hr>
+        <ul id="team2"></ul>
       </section>
       <p class="version">
-        Overlay v0.0.2 (very alpha)
+        Overlay v0.0.3 (very alpha)
       </p>
     </main>
     <footer>
@@ -95,12 +91,10 @@
         }
         return playerCache[playerName] + playerInfo;
       }
-      async function processTeam(team) {
-        var processedTeam = '';
-        for (player of team.split(" + ")) {
-          processedTeam += (await processPlayer(player) + ' + ');
+      async function* processTeam(team) {
+        for (const player of team.split(" + ")) {
+          yield await processPlayer(player);
         }
-        return processedTeam.substring(0, processedTeam.length - 2);
       }
       function initialize() {
         if (window.location.hash === "") {
@@ -109,29 +103,38 @@
         } else {
           var profileId = window.location.hash.substring(1);
         }
-        var match = document.getElementById("match");
         var team1 = document.getElementById("team1");
         var team2 = document.getElementById("team2");
         async function refresh() {
+          team1.replaceChildren();
+          team2.replaceChildren();
           try {
-              const response = await fetch(`https://legacy.aoe2companion.com/api/nightbot/match?profile_id=${profileId}`);
-              if (response.status === 200) {
-                const data = await response.json();
-                const players = data.split(" playing")[0];
-                const teams = players.split(" vs ");
-                team1.replaceChild(document.createTextNode(await processTeam(teams[0])), team1.firstChild);
-                team2.replaceChild(document.createTextNode(await processTeam(teams[1])), team2.firstChild);
+            const response = await fetch(`https://legacy.aoe2companion.com/api/nightbot/match?profile_id=${profileId}`);
+            if (response.status === 200) {
+              const data = await response.json();
+              const players = data.split(" playing")[0];
+              const teams = players.split(" vs ");
+              for await (const player of processTeam(teams[0])) {
+                const li = document.createElement('li');
+                li.append(document.createTextNode(player));
+                team1.append(li);
               }
+              for await (const player of processTeam(teams[1])) {
+                const li = document.createElement('li');
+                li.append(document.createTextNode(player));
+                team2.append(li);
+              }
+            }
           } catch (e) {
+            console.log("error", e);
             // nothing
           }
           setTimeout(refresh, 30000);
         }
-        match.removeChild(match.firstChild);
-        match.removeChild(match.firstChild);
         refresh();
       }
       initialize();
     </script>
+
   </body>
 </html>
