@@ -37,7 +37,7 @@
         bottom:0;
       }
       form {
-        padding: 15px;
+        padding: 0 15px;
       }
       .warning {
         padding: 15px;
@@ -80,7 +80,7 @@
       <section>
         <h2>What do you want to play?</h2>
         <form action="/query">
-          <dl>
+          <dl id="all">
             <dt>Barracks</dt><dd>
               <input type="checkbox" id="infantry"><label for="infantry">infantry</label>
             </dd>
@@ -107,6 +107,22 @@
               <input type="checkbox" id="counter"><label for="counter">counter</label>
             </dd>
           </dl>
+          <dl id="any">
+            <dt>Civs introduced in any of</dt><dd>
+              <input type="checkbox" checked="true" id="AoK"><label for="AoK"><abbr title="The Age of Kings (1999)">AoK</abbr></label>
+              <input type="checkbox" checked="true" id="AoC"><label for="AoC"><abbr title="The Conquerors (2000)">AoC</abbr></label>
+              <input type="checkbox" checked="true" id="TF"><label for="TF"><abbr title="The Forgotten (2013) — except Indians, removed in DoI">TF</abbr></label>
+              <input type="checkbox" checked="true" id="TAK"><label for="TAK"><abbr title="The African Kingdoms (2015)">TAK</abbr></label>
+              <input type="checkbox" checked="true" id="RotR"><label for="RotR"><abbr title="Rise of the Rajas (2016)">RotR</abbr></label>
+              <input type="checkbox" checked="true" id="TLK"><label for="TLK"><abbr title="The Last Khans (2019)">TLK</abbr></label>
+              <input type="checkbox" checked="true" id="LotW"><label for="LotW"><abbr title="Lords of the West (2021)">LotW</abbr></label>
+              <input type="checkbox" checked="true" id="DotD"><label for="DotD"><abbr title="Dawn of the Dukes (2021)">DotD</abbr></label>
+              <input type="checkbox" checked="true" id="DoI"><label for="DoI"><abbr title="Dynasties of India (2022)">DoI</abbr></label>
+              <input type="checkbox" checked="true" id="RoR"><label for="RoR"><abbr title="Return of Rome (2023)">RoR</abbr></label>
+              <input type="checkbox" checked="true" id="TMR"><label for="TMR"><abbr title="The Mountain Royals (2023)">TMR</abbr></label>
+              <input type="checkbox" checked="true" id="TTK"><label for="TTK"><abbr title="The Three Kingdoms (2025)">TTK</abbr></label>
+            </dd>
+          </dl>
         </form>
       </section>
       <section>
@@ -123,6 +139,7 @@
             <th>Civ</th>
             <th>Strengths</th>
             <th>Strong units</th>
+            <th>Introduced</th>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Armenians">Armenians</a></td>
@@ -130,6 +147,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+	    <td>TMR</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Aztecs">Aztecs</a></td>
@@ -137,6 +155,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>AoC</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Bengalis">Bengalis</a></td>
@@ -144,6 +163,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>DoI</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Berbers">Berbers</a></td>
@@ -154,6 +174,7 @@
               <span title="anti-cavalry archer cavalry archer" style="font-weight: bold;">camel archer</span>, <!-- TODO: stats -->
               <span title="FU, -20% food">hussar</span>
             </td>
+            <td>TAK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Bohemians">Bohemians</a></td>
@@ -161,6 +182,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>DotD</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Britons">Britons</a></td>
@@ -169,6 +191,7 @@
               <span title="archer with +0/+1 armor, +1 range, +10 wood, -5 gold compared to FU arbalester" style="font-weight: bold;">longbowman</span>,
               <span title="miss thumb ring, +3 range, +20% creation speed">arbalester</span>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Bulgarians">Bulgarians</a></td>
@@ -176,6 +199,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TLK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Burgundians">Burgundians</a></td>
@@ -183,6 +207,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>LotW</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Burmese">Burmese</a></td>
@@ -195,6 +220,7 @@
               <span title="FU, +5 attack vs archers">cavalier</span>,
               <span title="FU, +3 attack">hallebardier</span>
             </td>
+            <td>RotR</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Byzantines">Byzantines</a></td>
@@ -207,6 +233,7 @@
               <span title="FU, +25% attack speed, +1 range">fast fire ship</span>,
               <span title="+40% HP">building</span>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Celts">Celts</a></td>
@@ -214,6 +241,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Chinese">Chinese</a></td>
@@ -221,6 +249,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Cumans">Cumans</a></td>
@@ -228,6 +257,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TLK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Dravidians">Dravidians</a></td>
@@ -235,6 +265,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>DoI</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Ethiopians">Ethiopians</a></td>
@@ -247,6 +278,7 @@
               <span title="FU, increased blast radius">siege ram</span>,
               <span title="FU, increased blast radius">bombard cannon</span>
             </td>
+            <td>TAK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Franks">Franks</a></td>
@@ -254,6 +286,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Georgians">Georgians</a></td>
@@ -261,6 +294,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TMR</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Goths">Goths</a></td>
@@ -270,6 +304,7 @@
               <span title="miss last armor, +3 attack vs building, -35% food, -35% gold, +140% creation speed">champion</span>,
               <span title="miss last armor, +3 attack vs building, -35% wood, -35% food, +140% creation speed">hallebardier</span>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Gurjaras">Gurjaras</a></td>
@@ -277,6 +312,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>DoI</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Hindustanis">Hindustanis</a></td>
@@ -285,6 +321,7 @@
               <span title="FU, +20 HP, +25% attack speed, +1 attack, +2 attack vs buildings">imperial camel</span>,
               <span title="FU, +2 range, +1/+1 armor">hand cannoneer</span>
             </td>
+            <td>DoI</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Huns">Huns</a></td>
@@ -294,6 +331,7 @@
               <span title="FU, +20% creation speed">paladin</span>,
               <span title="FU, +20% creation speed">hussar</span>
             </td>
+            <td>AoC</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Incas">Incas</a></td>
@@ -301,6 +339,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TF</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Italians">Italians</a></td>
@@ -308,6 +347,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TF</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Japanese">Japanese</a></td>
@@ -319,6 +359,7 @@
               <span title="FU">arbalester</span>,
               <span title="TBW" style="font-weight: bold;">samurai</span> <!-- TODO: stats -->
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Jurchens">Jurchens</a></td>
@@ -326,6 +367,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TTK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Khitans">Khitans</a></td>
@@ -333,6 +375,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TTK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Khmer">Khmer</a></td>
@@ -342,6 +385,7 @@
               <span title="FU, +3 attack, +10% movement speed">elite battle elephant</span>,
               <span title="two projectiles, +1 range">heavy scorpion</span>
             </td>
+            <td>RotR</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Koreans">Koreans</a></td>
@@ -354,6 +398,7 @@
               <span title="Miss last attack, -20% wood">hallebardier</span>,
               <span title="TBW" style="font-weight: bold;">turtle ship</span> <!-- TODO: stats -->
             </td>
+            <td>AoC</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Lithuanians">Lithuanians</a></td>
@@ -361,6 +406,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TLK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Magyars">Magyars</a></td>
@@ -371,6 +417,7 @@
               <span title="TBW" style="font-weight: bold;">Magyar huszar</span>, <!-- TODO: stats -->
               <span title="FU, -15% food, free attack upgrades">hussar</span>
             </td>
+            <td>TF</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Malay">Malay</a></td>
@@ -378,6 +425,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>RotR</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Malians">Malians</a></td>
@@ -388,6 +436,7 @@
               <span title="miss last attack, +5 attack">heavy camel</span>,
               <span title="miss last attack, +5 attack">hussar</span>
             </td>
+            <td>TAK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Mayans">Mayans</a></td>
@@ -398,6 +447,7 @@
               <span title="FU, -30% wood, -30% gold">arbalester</span>,
               <span title="FU, two projectiles">elite skirmisher</span>
             </td>
+            <td>AoC</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Mongols">Mongols</a></td>
@@ -409,6 +459,7 @@
               <span title="+50% movement speed">siege ram</span>,
               <span title="+50% movement speed">siege onager</span>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Persians">Persians</a></td>
@@ -416,6 +467,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Poles">Poles</a></td>
@@ -423,6 +475,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>DotD</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Portuguese">Portuguese</a></td>
@@ -430,6 +483,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TAK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Romans">Romans</a></td>
@@ -437,6 +491,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>RoR</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Saracens">Saracens</a></td>
@@ -448,6 +503,7 @@
               <span title="FU, +15% attack">siege onager</span>,
               <span title="miss shipwright, +25% attack speed">galleon</span>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Shu">Shu</a></td>
@@ -455,6 +511,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TTK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Sicilians">Sicilians</a></td>
@@ -462,6 +519,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>LotW</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Slavs">Slavs</a></td>
@@ -469,6 +527,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TF</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Spanish">Spanish</a></td>
@@ -476,6 +535,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>AoC</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Tatars">Tatars</a></td>
@@ -484,6 +544,7 @@
               <span title="FU, +1/+1 armor, +2 line of sight, free thumb ring, free Parthian tactics">heavy cavalry archer</span>,
               <span title="FU, +1/+1 armor">hussar</span>
             </td>
+            <td>TLK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Teutons">Teutons</a></td>
@@ -491,6 +552,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Turks">Turks</a></td>
@@ -502,6 +564,7 @@
               <span title="FU, +20 HP, free chemistry">heavy cavalry archer</span>,
               <span title="FU, +0/+1 armor, free light cavalry upgrade, free hussar upgrade">hussar</span>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Vietnamese">Vietnamese</a></td>
@@ -512,6 +575,7 @@
               <span title="FU, +20% HP, +1 attack, +1 attack vs archer and cavalry archer, +0/+1 armor, free conscription">imperial skirmisher</span>,
               <span title="Miss last attack, +100 HP, free conscription">elite battle elephant</span>
             </td>
+            <td>RotR</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Vikings">Vikings</a></td>
@@ -519,6 +583,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>AoK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Wei">Wei</a></td>
@@ -526,6 +591,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TTK</td>
           </tr>
           <tr>
             <td><a href="https://aoe2techtree.net/#Wu">Wu</a></td>
@@ -533,6 +599,7 @@
             <td>
               <abbr title="to be written">TBW</abbr>
             </td>
+            <td>TTK</td>
           </tr>
         </table>
         <p id="noresult" class="warning" style="display: none;">
@@ -564,8 +631,13 @@
           var atLeastOne = false;
           document.querySelectorAll('tr:not(#header)').forEach(function(row) {
               row.style.display = 'table-row';
-              var keepRow = true;
-              document.querySelectorAll('input[type=checkbox]:checked').forEach(function(checkbox) {
+              var keepRow = false;
+              document.querySelectorAll('#any input[type=checkbox]:checked').forEach(function(checkbox) {
+                  if (row.querySelectorAll('td')[3].textContent == checkbox.id) {
+                      keepRow = true;
+                  }
+              });
+              document.querySelectorAll('#all input[type=checkbox]:checked').forEach(function(checkbox) {
                   if (!row.querySelectorAll('td')[1].textContent.includes(checkbox.id)) {
                       keepRow = false;
                   }
