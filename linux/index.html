@@ -78,6 +78,10 @@
       .error, .error strong {
         color: #721c24;
       }
+      .info p, .warning p, .error p {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
       .details {
         background-color: #eaecf0;
         padding: 0 15px;
@@ -151,13 +155,22 @@
       <!--<img src="logo.svg" alt="AoE2 on Linux logo" width="120" height="120" style="padding: 10px;">-->
       <div style="margin-left: 10px; padding: 10px;"><h1 style="font-size: 50px; margin:0;">AoE2 on Linux in 2025</h1></div>
     </header>
-    <p class="info">
-      Since 2023-10-06 and the release of <a href="https://github.com/ValveSoftware/Proton/releases/tag/proton-8.0-4">Proton 8.0-4</a>, Age of Empires II : Definitive Edition can be played again with the stable version of Proton (it was previously broken since 2023-06-27 and the release of <a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-87863/">AoE2:DE update 87863</a>).
-      If you've explicitely used a specific version of Proton before, you may want to switch back to the stable version.
-    </p>
     <p class="warning">
       Disclaimer: the length of the page may give the impression that this is going to be difficult. It really isn't. Keep on reading :)
     </p>
+    <div class="info">
+      <p>This page was last updated on <strong>2025-05-10</strong>. Latest changes most notably include:</p>
+      <dl>
+        <dt>2025-05-10</dt>
+        <dd>
+          <ul>
+            <li><a href="#how_do_i_use_capture_age_on_linux">Link to Kjir's instructions on how to use CaptureAge</a>, as it seems to be working properly for some people, now.</li>
+            <li><a href="#how_do_i_play_aoe2_on_lan_on_linux">Update instructions on how to play on LAN</a>, as 1) the official <code>BattleServer.exe</code> is working since the release of Proton 9.0-4 and 2) an alternative server is now available for fully offline multiplayer.</li>
+          </ul>
+        </dd>
+      </dl>
+      <p>See the <a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">full changelog.</a></p>
+    </div>
     <nav>
       <h2>Table of content</h2>
       <ul>
@@ -180,7 +193,7 @@
         <li><a href="#acknowledgements">Acknowledgements</a></li>
       </ul>
     </nav>
-    <main style="padding: 10px">
+    <main style="padding-bottom: 10px">
       <section>
         <h2 id="which_version_of_aoe2_should_i_play">
           <a href="#which_version_of_aoe2_should_i_play" class="anchor" aria-hidden="true">§</a>
@@ -503,41 +516,10 @@
         <!-- TODO -->
         <p>Playing on <abbr title="local area network">LAN</abbr> is a way to use the computer of one of the players as the server, when most people use a server provided by Microsoft instead.</p>
         <p>This is a feature which is available in all versions of the game, but while it's reachable right from the menu in The Age of Kings / The Conquerors, it's a bit hidden in the UI in later versions.</p>
-        <p>With Age of Empires II: Definitive Edition, LAN mode is available when you create a lobby and select “local LAN” as server. This uses a program called <tt>BattleServer.exe</tt> on the lobby creator's computer. Unfortunately, as far as I know, nobody has been able to use <tt>BattleServer.exe</tt> on Linux (the “local LAN” option is not even available in the list of servers).</p>
+        <p>With Age of Empires II: Definitive Edition, LAN mode is available when you create a lobby and select “local LAN” as server. This uses a program called <tt>BattleServer.exe</tt> on the lobby creator's computer.</p>
         <p>Keep in mind that the player running the server has to make sure some ports are open on his computer (and not blocked by a firewall, or hidden behind a <abbr title="network address translation">NAT</abbr> device, like a router). Also be sure to use TCP/IP and UDP/IP as protocol, as some of the other protocols available in The Age of Kings / The Conquerors (like IPX) are probably not supported anymore by most operating systems, routers…</p>
-        <aside class="details">
-          <h3>Why <tt>BattleServer.exe</tt> doesn't work on Linux (technical)</h3>
-          <p>
-            As far as I'm aware, the reason why <tt>BattleServer.exe</tt> doesn't work on Linux remains unknown.
-          </p>
-          <p>
-            My own hypothesis (as of August 2022, with Proton 6.3-8) is that it tries communicate with the game over <abbr title="user datagram protocol">UDP</abbr> on port <tt>9999</tt> by using the broadcast IP address <tt>255.255.255.255</tt>, but does so by using a <abbr title="transmission control protocol">TCP</abbr> socket, which may be legal on Windows (I don't know) but isn't on Linux.
-            One can see the following warning message in the console which briefly opens when <tt>BattleServer.exe</tt> starts:
-            <pre>
-              2022/08/06 23:20:33 #288 [Warning] Socks::Connect: failed; errno=10013 errstr='ATLAS_NOTINTABLE: Undefined error.'
-            </pre>
-            And at the same time, one can see the following output using <code>strace</code>:
-            <pre>
-              [pid 125190] bind(10, {sa_family=AF_INET, sin_port=htons(8888), sin_addr=inet_addr("0.0.0.0")}, 16) = 0
-              [pid 125190] close(10)                  = 0
-              [pid 125190] listen(10, 1000)           = 0
-              …
-              [pid 125190] dup(10)                    = 11
-              [pid 125190] connect(11, {sa_family=AF_INET, sin_port=htons(9999), sin_addr=inet_addr("255.255.255.255")}, 16) = -1 EACCES (Permission denied)
-              [pid 125190] close(11)                  = 0
-            </pre>
-            <tt>TCP:8888</tt> and <tt>UDP:9999</tt> are two ports which are documented to be used to play the game on LAN, and indeed, we can see that the latter is being used, in the output of <code>lsof -nP -i :9999</code>:
-            <pre>
-              COMMAND   PID             USER    FD  TYPE  DEVICE SIZE/OFF NODE NAM
-              wineserve 131455 nonfreegaming  310u  IPv4 2197508      0t0  UDP *:9999
-              AoE2DE_s. 131519 nonfreegaming   55u  IPv4 2197508      0t0  UDP *:9999
-            </pre>
-            I therefore assume that <tt>BattleServer.exe</tt> is supposed to let the game connect to itself on port <tt>8888</tt> and to broadcast its presence to all running games on the LAN on port <tt>9999</tt>, but can't do the latter because instead of creating a new socket of type <code>SOCK_DGRAM</code> for UDP, it uses a copy of a <code>SOCK_STREAM</code> socket designed for TCP.
-          </p>
-          <p>
-            If you've been able to dig further into the issue, please let me know.
-          </p>
-        </aside>
+        <p>While The Age of Kings / The Conquerors is fully playable on LAN without any Internet access, later versions still require Internet access for Steam and getting to the multiplayer menu (very bad reasons, if you ask me). Thankfully, there's <a href="https://github.com/luskaner/ageLANServer">an alternative server for Age of Empires II: Definitive Edition</a>, which is designed to allow for fully offline LAN play.</p>
+	<p>I'll update this section as soon as I find the time to try the alternative server myself.</p>
         <aside>
           <h3>Other places to find more information about playing on LAN on Linux</h3>
           <ul>
@@ -552,37 +534,12 @@
         </h2>
         <!-- TODO -->
         <p><a href="https://captureage.com/">CaptureAge</a> is a very powerful tool to watch saved gamed with an overlay of information.</p>
-        <p>Unfortunately, as far as I know, nobody has been able to use it on Linux. With little effort, one can start it, connect to the game and start replaying a saved game, but it won't show in the custom overlay.</p>
-        <p>To increase the chances of getting CaptureAge on Linux, you can <a href="https://captureage.nolt.io/top">vote for it</a> (as of 2025, Linux support is the first most voted suggestion for CaptureAge by a wide margin).</p>
-        <aside class="details">
-          <h3>Why CaptureAge doesn't work on Linux (technical)</h3>
-          <p>
-            As far as I'm aware, the reason why CaptureAge doesn't work on Linux remains unknown.
-          </p>
-          <p>
-            My own hypothesis (as of August 2021) is that the problem is related to the encryption of <abbr title="inter-process communications">IPCs</abbr> between CaptureAge and the game.
-            Indeed, by looking at the logs, one can see that the initial IPCs are using Windows named pipes (and everything works fine), but then switch to SSL when replaying a saved game (and it breaks here):
-            <pre>
-              Pipe \\.\pipe\captureage_prod_ipc_REDACTED_domApp instance 0 state: connecting
-              Connecting to pipe \\.\pipe\captureage_prod_ipc_REDACTED_domApp
-              App event: application heartbeat outOfGame
-              Pipe \\.\pipe\captureage_prod_ipc_REDACTED_domApp instance 0 state: reading
-              App event: gameIntegration loadRec fromCadeExpanded
-              telling game to load replay C:\users\steamuser\Games\Age of Empires 2 DE\REDACTED\savegame.aoe2record
-              E0807 15:03:47.671000000   740 ssl_transport_security.cc:507] Corruption detected.
-              E0807 15:03:47.671000000   740 ssl_transport_security.cc:483] error:1408F119:SSL routines:ssl3_get_record:decryption failed or bad record mac
-              E0807 15:03:47.672000000   740 secure_endpoint.cc:208] Decryption error: TSI_DATA_CORRUPTED
-              E0807 15:03:47.672000000   740 ssl_transport_security.cc:534] SSL_write failed with error SSL_ERROR_SYSCALL.
-            </pre>
-          </p>
-          <p>
-            If you've been able to dig further into the issue, please let me know.
-          </p>
-        </aside>
+        <p>While I've not personally been able to use it Linux <em>yet</em>, multiple people have reported that it now works properly with some minor tinkering.</p>
+        <p>Until I figure out which are the minimum required steps to get CaptureAge to work on Linux, you should have a look at <a href="https://gist.github.com/Kjir/dadb0a2bc1a71aa265cfdbecaf7569b8">Kjir's instructions</a>.</p>
+        <p>I'll update this section as soon as I get a full understanding of what is missing from Proton out-of-the-box.</p>
         <aside>
           <h3>Other places to find more information about CaptureAge on Linux</h3>
           <ul>
-            <li><a href="https://www.reddit.com/r/aoe2/comments/ot88yg/any_linux_users_here_lets_make_captureage_through/">Reddit thread with attempts at getting CaptureAge to work on Linux</a></li>
             <li><a href="https://appdb.winehq.org/appview.php?iVersionId=40156">CaptureAge on Wine's AppDB</a></li>
             <li><a href="https://discord.gg/WPKakH8">CaptureAge on Discord</a> (note: it's <em>not</em> a Linux support channel; but attempts at getting CaptureAge to work on Linux have been met with amiability)</li>
           </ul>
@@ -611,7 +568,7 @@
         <p>Thanks everyone, GL HF!</p>
       </section>
       <p class="version">
-        Last update (<a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">changelog</a>) on 2025-04-11 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-141935/">C:BfG 141935</a>)
+        Last update (<a href="https://github.com/ArkanosisNet/aoe2.arkanosis.net/commits/master">changelog</a>) on 2025-05-10 (<a href="https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-143421/">TTK 143421</a>)
       </p>
     </main>
     <footer>
